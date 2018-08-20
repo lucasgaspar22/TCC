@@ -1,0 +1,21 @@
+GET    ( all users   ) - OK
+GET    ( one user    ) - OK
+POST   ( add user    ) - OK
+PUT    ( update user ) - OK
+DELETE ( delete user ) -  OK
+________________________________________________________________________________________________________________________
+GET    (all IS_FRIEND relation of one node)              - OK
+GET    ( IS_FRIEND relation between two nodes )          - OK
+POST   (create a IS_FRIEND relation between two nodes)   - OK
+DELETE (delete all IS_FRIEND relation between two nodes) - OK
+DELETE (delete a IS_FRIEND relation between two nodes)   - OK
+_________________________________________________________________________________________________________________________
+GET (all ASKED_AS_FRIEND relation of a node)                                    -
+GET (ASKED_AS_FRIEND relation between two nodes)                                -
+POST (create a ASKED_AS_FRIEND relation from a node to another)                 -
+PUT  (UPDATE ASKED_AS_FRIEND relation to IS_FRIEND relation between two nodes)  -
+DELETE (delete a ASKED_AS_FRIEND relation of a node to another)                 -
+_________________________________________________________________________________________________________________________
+
+
+
