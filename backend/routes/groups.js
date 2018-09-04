@@ -5,40 +5,47 @@ const db = require('../config/database');
 const formattedDate = require('../utils/date');
 
 //Método para pegar todos os grupos dos quais um usuário é membro
-router.get('/:idU', (req,res,next)=>{
+router.get('/:idU/:pag', (req,res,next)=>{
     let idU = parseInt(req.params.idU);
+    let pag = parseInt(req.params.pag);
+    let pagina = pag*5;
     let query = `MATCH (user:User)-[rel:CREATED | :IS_MEMBER]->(group:Group)
                 WHERE id(user) = ${idU}
-                RETURN group,rel`;
+                RETURN group,rel  SKIP ${pagina} LIMIT 5`;
 
     db(query,res);
 });
 
 // Método para voltar todos os membros de um grupo
-router.get('/members/:idG',(req,res,next)=>{
+router.get('/members/:idG/:pag',(req,res,next)=>{
     let idG = parseInt(req.params.idG);
+    let pag = parseInt(req.params.pag);
+    let pagina = pag*5;
     let query = `MATCH (user:User)-[rel:CREATED | :IS_MEMBER]->(group:Group)
                  WHERE id(group) = ${idG}
-                 RETURN user,rel`;
+                 RETURN user,rel SKIP ${pagina} LIMIT 5`;
     db(query,res)
 });
 
 //Método para ver todos os pedidos de participação feitos para um grupo
-router.get('/ask_membership/:idG', (req,res,next) =>{
+router.get('/ask_membership/:idG/:pag', (req,res,next) =>{
     let idG = parseInt(req.params.idG);
+    let pag = parseInt(req.params.pag);
+    let pagina = pag*5;
     let query = `MATCH (user:User)-[rel:ASKED_MEMBERSHIP]->(group:Group)
                  WHERE id(group) = ${idG} 
-                 RETURN user,rel`;
+                 RETURN user,rel SKIP ${pagina} LIMIT 5`;
     db(query,res);
 });
 
 //Método responsável por listar todos os convites recebidos por um usuário 
 router.get('/invite/:idU', (req,res,next) =>{
     let idU = req.params.idU;
-
+    let pag = parseInt(req.params.pag);
+    let pagina = pag*5;
     let query = `MATCH (group:Group)-[inv:INVITED]->(user:User) 
                 WHERE id(user) = ${idU} 
-                RETURN group,inv`;
+                RETURN group,inv SKIP ${pagina} LIMIT 5`;
 
     db(query,res);
 });
