@@ -6,12 +6,13 @@ const formattedDate = require('../utils/date');
 
 
 // retorna todos os depoimentos de um nó que tem a relação has_depo (todos os depoimentos recebidos por um nó juntamente com seu autor)
-router.get('/has_depo/:id', (req,res,next) =>{
+router.get('/has_depo/:id/:pag', (req,res,next) =>{
     let id = parseInt(req.params.id);
-
+    let pag = parseInt(req.params.pag);
+    let pagina = pag*5;
     let query = `MATCH (user:User)-[has:HAS_DEPO]->(depo:Depo)<-[wrote:WROTE]-(sender:User) 
                 WHERE id(user) = ${id} 
-                RETURN depo, sender`;
+                RETURN depo, sender SKIP ${pagina} LIMIT 5`;
     db(query,res);
 });
 
@@ -26,12 +27,13 @@ router.get('/has_depo/:idUser/:idDepo', (req,res,next) =>{
 });
 
 // Retorna todos os depoimentos e seus autores que precisam ser aceitos por um usuário ( WAITING_CONFIRMATION)
-router.get('/waiting_confirmation/:id', (req,res,next)=>{
+router.get('/waiting_confirmation/:id/:pag', (req,res,next)=>{
     let id = parseInt(req.params.id);
-    
+    let pag = parseInt(req.params.pag);
+    let pagina = pag*5;
     let query = `MATCH (user:User)<-[waiting:WAITING_CONFIRMATION]-(depo:Depo)<-[wrote:WROTE]-(sender:User) 
                 WHERE id(user) = ${id} 
-                RETURN depo, sender,waiting`;
+                RETURN depo, sender,waiting SKIP ${pagina} LIMIT 5`;
     db(query,res);
 });
 
@@ -46,12 +48,13 @@ router.get('/waiting_confirmation/:idUser/:idDepo', (req,res,next) =>{
 });
 
 // Retorna todos os depoimentos escritos plo usuário juntamente com seus destinatários ( retorna tanto depoimentos pendentes quanto depoimentos aceitos )
-router.get('/wrote/:id' , (req,res,next)=>{
+router.get('/wrote/:id/:pag' , (req,res,next)=>{
     let id = parseInt(req.params.id);
-
+    let pag = parseInt(req.params.pag);
+    let pagina = pag*5;
     let query = `MATCH (user:User)-[wrote:WROTE]->(depo:Depo)-[rel]-(n:User) 
                 WHERE id(user)= ${id} 
-                return wrote,depo,rel,n`;
+                return wrote,depo,rel,n SKIP ${pagina} LIMIT 5`;
     db(query,res);
 
 });
