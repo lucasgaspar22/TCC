@@ -4,12 +4,13 @@ const router = express.Router();
 const db = require('../config/database');
 
 // Retorna todas as solicitações ( ASKED_AS_FRIEND ) feitas a um usuário
-router.get('/:id',(req,res,next)=>{
+router.get('/:id/:pag',(req,res,next)=>{
     let id = parseInt(req.params.id);
-
+    let pag = parseInt(req.params.pag);
+    let pagina = pag*5;
     let query = `MATCH (n:User)-[rel:ASKED_AS_FRIEND]->(node:User) 
                  WHERE id(node) = ${id} 
-                 RETURN rel,n`;
+                 RETURN rel,n SKIP ${pagina} LIMIT 5`;
     db(query,res);
 });
 
