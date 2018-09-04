@@ -4,8 +4,10 @@ const router = express.Router();
 const db = require('../config/database');
 
 //Método que busca todos os nós do tipo usuário
-router.get('/', (req, res,next)=>{
-    let query = `MATCH (node:User) RETURN node`
+router.get('/:pag', (req, res,next)=>{
+    let pag = parseInt(req.params.pag);
+    let pagina = pag*5;
+    let query = `MATCH (node:User) RETURN node  SKIP ${pagina} LIMIT 5`
     db(query,res)
 }); 
 
