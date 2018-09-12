@@ -39,7 +39,7 @@ router.get('/ask_membership/:idG/:pag', (req,res,next) =>{
 });
 
 //Método responsável por listar todos os convites recebidos por um usuário 
-router.get('/invite/:idU', (req,res,next) =>{
+router.get('/invite/:idU/:pag', (req,res,next) =>{
     let idU = req.params.idU;
     let pag = parseInt(req.params.pag);
     let pagina = pag*5;
