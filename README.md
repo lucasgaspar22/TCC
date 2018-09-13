@@ -25,9 +25,9 @@ Para que o projeto funcione normalmente é necessário que seja instalado:
 
 ## Autores
 
-* **Lucas Gaspar** - *Backend e Frontend*
+* **Lucas Gaspar** - *Backend e Frontend* E-mail: lucasgaspar@gec.inatel.br
 * **Karla Pereira** - *Documentação e Artigo*
-* **Rafael Souza** - *Backend e Frontend*
+* **Rafael Souza** - *Backend e Frontend* E-mail: rafaelsouza@gec.inatel.br
 * **Maria Isabel** - *Documentação e Artigo*
 
 ## Orientador
