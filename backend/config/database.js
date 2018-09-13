@@ -1,7 +1,7 @@
 var neo4j = require('neo4j');
 
 // Connect to DataBase
-var db = new neo4j.GraphDatabase('http://neo4j:12345678@localhost:7474');
+var db = new neo4j.GraphDatabase('http://neo4j:1234@localhost:7474');
 
 
 function executeQuery(my_query,res){
@@ -14,7 +14,7 @@ function executeQuery(my_query,res){
             res.send("999")
         } else {
            res.send(result);
-        }  
+        }   
     });
 }
 
