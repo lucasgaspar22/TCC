@@ -16,7 +16,7 @@ Para que o projeto funcione normalmente é necessário que seja instalado:
 ### Como utilizar
 * Clone o repositório
 * Navegue até a pasta
-* Crie um banco de dados no Neo4J e troque as configurações em [database.js](backend/config/database.js)  
+* Crie um banco de dados no Neo4J e troque as configurações em [database.js](backend/config/database.js) na linha 4
 ```
     var db = new neo4j.GraphDatabase('http://<USER>:<PASSWORD>@localhost:7474');
 ```
