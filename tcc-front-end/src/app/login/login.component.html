@@ -1,0 +1,40 @@
+<div class="login-box">
+    <div class="login-logo">
+      <a href="../../index2.html"><b>Connect</b>U</a>
+    </div>
+    
+    <div class="login-box-body">
+        <div class="login-logo">
+          Entrar
+        </div>
+      <p class="login-box-msg">Faça o login para entrar</p>
+      
+      <form #form="ngForm" novalidate>
+        <div class="form-group has-feedback" [class.has-success] = "email.valid && (email.dirty || email.touched)" [class.has-error] = "!email.valid && (email.dirty || email.touched)">
+          <input type="email" name="email" #email="ngModel" ngModel required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" placeholder="Email">
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          <span class= "help-block" *ngIf="!email.valid && (email.dirty || email.touched)"> <i class="fa fa-remove"></i> Ops</span>
+          <span class= "help-block" *ngIf="email.valid && (email.dirty || email.touched)"> <i class="fa fa-check"></i> Ok</span>
+        </div>
+
+        <div class="form-group has-feedback" [class.has-success] = "senha.valid && (senha.dirty || senha.touched)" [class.has-error] = "!senha.valid && (senha.dirty || senha.touched)">
+          <input type="password" name="senha" #senha="ngModel" ngModel required minlength = "8" class="form-control" placeholder="Senha">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          <span class= "help-block" *ngIf="!senha.valid && (senha.dirty || senha.touched)"> <i class="fa fa-remove"></i> Ops</span>
+          <span class= "help-block" *ngIf="senha.valid && (senha.dirty || senha.touched)"> <i class="fa fa-check"></i> Ok</span>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button (click)="login(form.value)" type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+          </div>
+          
+        </div>
+      </form>
+      <hr>
+      <a class="text-center" [routerLink]="['Cadastro']">Não tem conta? Cadastre-se</a><br>
+      <a class="text-center">Esqueceu sua senha?</a>
+  
+    </div>
+    <!-- /.login-box-body -->
+  </div>
+  <!-- /.login-box -->
