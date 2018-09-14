@@ -14,7 +14,7 @@ function executeQuery(my_query,res){
             res.send("999")
         } else {
            res.send(result);
-        }   
+        }
     });
 }
 

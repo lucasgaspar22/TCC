@@ -26,7 +26,7 @@ router.get('/check/:email',(req,res,next)=>{
     let email = req.params.email;
     let query = `MATCH (node:User) 
                   WHERE node.email = "${email}" 
-                  RETURN COUNT(node)`;
+                  RETURN COUNT(node) as n`;
     db(query,res);
 
 })
@@ -34,13 +34,10 @@ router.get('/check/:email',(req,res,next)=>{
 router.post('/', (req,res,next) =>{
     let nome = req.body.nome;
     let email = req.body.email;
-    let senha = req.body.senha;
+    let token = req.body.token;
     let foto = req.body.foto;
     let profissao = req.body.profissao;
     let local  = req.body.local;
-
-    let pre_token = email + senha;
-    let token = md5(pre_token);
 
     let query = `CREATE ( node:User {token:"${token}",nome:"${nome}",email:"${email}", foto:"${foto}", profissao:"${profissao}", local:"${local}" })
               RETURN node`;
