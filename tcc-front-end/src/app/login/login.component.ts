@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   is_auth:boolean = false;
 
-  constructor(private http:HttpClient,private route: ActivatedRoute, private router:Router, private toastr:ToastrService) { }
+  constructor(private http:HttpClient, private router:Router, private toastr:ToastrService) { }
 
   ngOnInit() {
   }
@@ -36,8 +36,6 @@ export class LoginComponent implements OnInit {
         this.is_auth = true;
         localStorage.setItem("user", JSON.stringify(res[0]));
         this.showSuccess();
-        console.log(res);
-        console.log(typeof(res));
       }else{
         this.is_auth = false;
         this.showError();

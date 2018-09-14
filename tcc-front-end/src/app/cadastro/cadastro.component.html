@@ -53,13 +53,14 @@
       <div class="form-group has-feedback" [class.has-success] = "resenha.valid && (resenha.dirty || resenha.touched)" [class.has-error] = "!resenha.valid && (resenha.dirty || resenha.touched)">
         <input type="password" name="resenha" #resenha="ngModel" ngModel required minlength = "8" class="form-control" placeholder="Repita a sua senha">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <span class= "help-block" *ngIf="form.value.senha !== form.value.resenha"> <i class="fa fa-remove"></i> As senhas não são iguais</span>
         <span class= "help-block" *ngIf="!resenha.valid && (resenha.dirty || resenha.touched)"> <i class="fa fa-remove"></i> Ops</span>
         <span class= "help-block" *ngIf="resenha.valid && (resenha.dirty || resenha.touched)"> <i class="fa fa-check"></i> Ok</span>
       </div>
 
       <div class="row">
         <div class="col-xs-12">
-          <button (click)="cadastrar(form.value)" type="submit" class="btn btn-primary btn-block btn-flat">Cadastrar-se</button>
+          <button [disabled]="isButtonDisabled(form, form.value.senha,form.value.resenha)"(click)="cadastrar(form.value)" type="submit" class="btn btn-primary btn-block btn-flat">Cadastrar-se</button>
         </div>
         
       </div>
