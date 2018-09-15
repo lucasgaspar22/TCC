@@ -29,7 +29,36 @@ router.get('/check/:email',(req,res,next)=>{
                   RETURN COUNT(node) as n`;
     db(query,res);
 
-})
+});
+
+//Retorna o número de solicitações de amizade feitas a um usuário
+router.get('/get_friend_solicitations/:id',(req,res,next)=>{
+  let id = parseInt(req.params.id);
+  let query = `MATCH (node:User)<-[asked:ASKED_AS_FRIEND]-(node2:User)   
+               WHERE id(node) = ${id} 
+               RETURN  COUNT(asked) as friends`;
+  db(query,res); 
+});
+
+//Retorna o número de solicitações de depoimentos feitas a um usuário
+router.get('/get_depo_solicitations/:id',(req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (node:User)<-[waiting:WAITING_CONFIRMATION]-(depo:Depo)   
+                 WHERE id(node) = ${id} 
+                 RETURN  COUNT(waiting) as depos`;
+    db(query,res); 
+});
+
+//Retorna o número de convites de participação de grupo feitas a um usuário
+router.get('/get_group_invitations/:id',(req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (node:User)<-[inv:INVITED]-(group:Group)   
+                 WHERE id(node) = ${id} 
+                 RETURN  COUNT(inv) as invites`;
+    db(query,res); 
+});
+
+
 //Método para inserir um usuário
 router.post('/', (req,res,next) =>{
     let nome = req.body.nome;
