@@ -32,13 +32,22 @@ router.get('/check/:email',(req,res,next)=>{
 });
 
 //Retorna o número de solicitações de amizade feitas a um usuário
-router.get('/get_friend_solicitations/:id',(req,res,next)=>{
+router.get('/get_friend_solicitations_recieved/:id',(req,res,next)=>{
   let id = parseInt(req.params.id);
   let query = `MATCH (node:User)<-[asked:ASKED_AS_FRIEND]-(node2:User)   
                WHERE id(node) = ${id} 
                RETURN  COUNT(asked) as friends`;
   db(query,res); 
 });
+
+// Retorna o número de solicitações de amizade enviadas por um usuário
+router.get('/get_friend_solicitations_sent/:id',(req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (node:User)-[asked:ASKED_AS_FRIEND]->(node2:User)   
+                 WHERE id(node) = ${id} 
+                 RETURN  COUNT(asked) as friends`;
+    db(query,res); 
+  });
 
 //Retorna o número de solicitações de depoimentos feitas a um usuário
 router.get('/get_depo_solicitations/:id',(req,res,next)=>{
@@ -58,6 +67,58 @@ router.get('/get_group_invitations/:id',(req,res,next)=>{
     db(query,res); 
 });
 
+//Retorna o número de amigos de um usuário
+router.get('/get_friend_number/:id',(req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (node:User)-[rel:IS_FRIEND]-(node2:User) 
+                 WHERE id(node) = ${id} 
+                 RETURN COUNT (rel) as friends`;
+    db(query,res);
+})
+
+//Retorna o número de depoimentos de um usuário
+router.get('/get_depo_number/:id',(req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (node:User)-[rel:HAS_DEPO]->(depo:Depo) 
+                 WHERE id(node) = ${id} 
+                 RETURN COUNT (rel) as depos`;
+    db(query,res);
+});
+
+//Retorna o número depoimentos escritos por um usuário
+router.get('/get_written_depo_number/:id', (req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (node:User)-[rel:WROTE]-:(depo:Depo) 
+                 WHERE id(node) = ${id} 
+                RETURN COUNT (rel) as depos`
+});
+
+//Retorna o número de grupos que um usuário faz parte
+router.get('/get_group_number/:id',(req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (node:User)-[rel:IS_MEMBER | :CREATED]->(group:Group) 
+                 WHERE id(node) = ${id} 
+                 RETURN COUNT (rel) as groups`;
+    db(query,res);
+});
+
+//Retorna o número de grupos que um usuário criou
+router.get('/get_created_group_number/:id',(req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (node:User)-[rel:CREATED]->(group:Group) 
+                 WHERE id(node) = ${id} 
+                 RETURN COUNT (rel) as created`;
+    db(query,res);
+});
+
+//Retorna o número de grupos que um usuário pediu para participar
+router.get('/get_asked_group_number/:id',(req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (node:User)-[rel:ASKED_MEMBERSHIP]->(group:Group) 
+                 WHERE id(node) = ${id} 
+                 RETURN COUNT (rel) as asked`;
+    db(query,res);
+});
 
 //Método para inserir um usuário
 router.post('/', (req,res,next) =>{
