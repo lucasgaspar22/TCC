@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { DashboardMainComponent } from './dashboard/dashboard-main/dashboard-main.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
+import { BuscaComponent } from './dashboard/dashboard-main/busca/busca.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CadastroComponent } from './cadastro/cadastro.component';
     DashboardComponent,
     LoginComponent,
     DashboardMainComponent,
-    CadastroComponent
+    CadastroComponent,
+    BuscaComponent
   ],
   imports: [
     BrowserModule,

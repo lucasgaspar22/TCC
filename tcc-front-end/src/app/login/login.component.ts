@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     this.toastr.success('Sucesso, login efetuado com sucesso!','Deu bom!',{
       timeOut:5000
     });
-    this.router.navigate(['/ConnnectU']);
+    this.router.navigate(['/QuemIndica']);
   }
 
   showError(){

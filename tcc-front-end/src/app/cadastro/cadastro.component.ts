@@ -43,7 +43,7 @@ export class CadastroComponent implements OnInit {
       if( res.length !== 0 ){
         localStorage.setItem("user", JSON.stringify(res[0]));
         this.toastr.success('Sucesso, seja bem vindo ao ConnectU!','Deu bom!',{timeOut:5000});
-        this.router.navigate(['/ConnnectU']);
+        this.router.navigate(['/QuemIndica']);
       }else{
         this.toastr.error('Ops, algo deu muito errado :(!','Deu ruim!',{timeOut:5000});
       }

@@ -73,6 +73,7 @@ router.post('/:id1/:id2', (req,res,next)=>{
     db(query,res);
 });
 
+
 //Atualiza uma ligação do tipo WAITING_CONFIRMATION para uma HAS_DEPO
 router.put('/:idUser/:idDepo',(req,res,next)=>{
     let idUser = parseInt(req.params.idUser);

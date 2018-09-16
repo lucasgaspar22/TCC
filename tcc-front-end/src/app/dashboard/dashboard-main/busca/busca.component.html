@@ -1,0 +1,42 @@
+<section class = "content">
+  <div class = "box box-solid">
+    <div class = "box-header with-border">
+        <h2 class="box-title"><b>Buscar</b></h2>
+    </div>
+    <div class = "box-body">
+      <div class = "row">
+        <form #form="ngForm" novalidate>
+          <div class = "col-md-9">
+            <input type="text" name="email_name" #email_name="ngModel" ngModel required  class="form-control" placeholder="Digite o nome ou e-mail">
+          </div>
+          <div class = "col-md-3">
+            <button [disabled]="!form.valid" type="button" class="btn btn-block btn-primary" (click)="search(form.value)">Buscar</button>
+          </div>
+        </form>
+      </div>
+      <hr>
+
+      <div class = "row" *ngIf="encontrou_usuarios">
+        <div class = col-md-4 *ngFor="let usuario of usuarios; let i = index">
+            <div  class="box box-widget widget-user-2">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-blue">
+                  <div class="widget-user-image">
+                    <img class="img-circle" src="{{usuario.node.properties.foto}}" alt="User Avatar">
+                  </div>
+                  <!-- /.widget-user-image -->
+                  <h3 class="widget-user-username">{{usuario.node.properties.nome}}</h3>
+                  <h5 class="widget-user-desc">{{usuario.node.properties.profissao}}</h5>
+                </div>
+                <div class="box-footer no-padding">
+                  <ul class="nav nav-stacked">
+                      <button type="button" class="btn btn-block btn-default">Adicionar Amigo</button>
+                  </ul>
+                </div>
+              </div>
+        </div>
+          
+      </div>
+    </div>
+  </div>
+</section>

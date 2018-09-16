@@ -11,6 +11,14 @@ router.get('/all/:pag', (req, res,next)=>{
     db(query,res)
 }); 
 
+//Método que retorna os nós que contém a sting no nome ou no email
+router.get('/search/:string', (req,res,next)=>{
+    let string = req.params.string;
+    let query = `MATCH (node:User) 
+                WHERE node.nome CONTAINS '${string}' OR node.email CONTAINS '${string}' 
+                RETURN node`;
+    db(query,res);
+})
 //método que retorna um usuário de acordo com o id
 router.get('/:token' , (req,res,next) =>{
     let token = req.params.token;
