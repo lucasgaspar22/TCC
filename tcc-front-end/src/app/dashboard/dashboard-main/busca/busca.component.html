@@ -20,7 +20,7 @@
         <div class = col-md-4 *ngFor="let usuario of usuarios; let i = index">
             <div  class="box box-widget widget-user-2">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-blue">
+                <div class="widget-user-header " [class.bg-blue] =" i%4 === 1 " [class.bg-red]="i%4 === 0" [class.bg-yellow]="i%4===2" [class.bg-green]="i%4 ===3">
                   <div class="widget-user-image">
                     <img class="img-circle" src="{{usuario.node.properties.foto}}" alt="User Avatar">
                   </div>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="box-footer no-padding">
                   <ul class="nav nav-stacked">
-                      <button type="button" class="btn btn-block btn-default">Adicionar Amigo</button>
+                    <button type="button" class="btn btn-block btn-default">Ver Perfil</button> 
                   </ul>
                 </div>
               </div>

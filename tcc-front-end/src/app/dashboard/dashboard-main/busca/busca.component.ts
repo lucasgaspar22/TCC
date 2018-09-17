@@ -22,11 +22,10 @@ export class BuscaComponent implements OnInit {
   search(form:any){
     let name_email = form.email_name;
 
-    let url = `http://localhost:3003/API/user/search/${name_email}`;
+    let url = `http://localhost:3003/API/user/search/${name_email}/${this.id_usuario_logado}`;
 
     this.http.get<any[]>(url).subscribe(res=>{
       if(res.length>0){
-        console.log(res)
         this.usuarios = res;
         this.encontrou_usuarios = true;
       }else{
@@ -35,5 +34,6 @@ export class BuscaComponent implements OnInit {
       }
     })
   }
+
 
 }
