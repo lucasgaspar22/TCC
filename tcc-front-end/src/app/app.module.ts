@@ -20,6 +20,9 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { BuscaComponent } from './dashboard/dashboard-main/busca/busca.component';
 import { PerfilComponent } from './dashboard/dashboard-main/perfil/perfil.component';
 
+//APP SERVICES
+import { PerfilService } from './dashboard/dashboard-main/perfil/perfil-service.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +43,7 @@ import { PerfilComponent } from './dashboard/dashboard-main/perfil/perfil.compon
     ToastrModule.forRoot(),
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [],
+  providers: [PerfilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

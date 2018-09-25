@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-busca',
@@ -12,7 +13,7 @@ export class BuscaComponent implements OnInit {
   id_usuario_logado:number;
   usuarios: any = [];
   encontrou_usuarios:boolean = false;
-  constructor(private http: HttpClient, private toastr:ToastrService) { }
+  constructor(private http: HttpClient, private toastr:ToastrService, private router:Router) { }
 
   ngOnInit() {
     this.id_usuario_logado = JSON.parse(localStorage.getItem('user')).node._id;
@@ -33,6 +34,10 @@ export class BuscaComponent implements OnInit {
         this.encontrou_usuarios = false;
       }
     })
+  }
+
+  verPerfil(id:number){
+    this.router.navigate(['/QuemIndica/perfil', id]);
   }
 
 
