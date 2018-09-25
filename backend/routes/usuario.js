@@ -30,12 +30,21 @@ router.get('/get_relation/:id1/:id2', (req,res,next)=>{
                  RETURN rel`;
     db(query,res);
 });
-//método que retorna um usuário de acordo com o id
+//método que retorna um usuário de acordo com o token
 router.get('/:token' , (req,res,next) =>{
     let token = req.params.token;
     
     let query = `MATCH (node:User) 
                   WHERE node.token = "${token}" 
+                  RETURN node`;
+    db(query,res);
+});
+
+//método que retorna um usuário de acordo com o ID 
+router.get('/get_by_id/:id', (req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (node:User) 
+                  WHERE id(node) = ${id} 
                   RETURN node`;
     db(query,res);
 });

@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardMainComponent } from './dashboard/dashboard-main/dashboard-main.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { BuscaComponent } from './dashboard/dashboard-main/busca/busca.component';
+import { PerfilComponent } from './dashboard/dashboard-main/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BuscaComponent } from './dashboard/dashboard-main/busca/busca.component
     LoginComponent,
     DashboardMainComponent,
     CadastroComponent,
-    BuscaComponent
+    BuscaComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
