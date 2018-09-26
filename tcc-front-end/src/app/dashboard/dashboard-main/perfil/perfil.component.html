@@ -6,7 +6,59 @@
                     <img class="profile-user-img img-responsive img-circle" src="{{usuario.foto}}" alt="User profile picture">            
                     <h3 class="profile-username text-center">{{usuario.nome}}</h3>
                     <p class="text-muted text-center">{{usuario.profissao}}</p>
-                    <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Indicações</b> <a class="pull-right">{{num_depo}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Grupos</b> <a class="pull-right">{{num_group}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Amigos</b> <a class="pull-right">{{num_friends}}</a>
+                        </li>
+                    </ul>
+                    <button class="btn btn-primary btn-block"><b>Adicionar</b></button>
+                </div>
+            </div>
+
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Grupos</h3>
+                </div>
+                <div class="box-body">
+                    <div *ngFor="let grupo of grupos">
+                        <strong><i class="fa fa-cube margin-r-5"></i>{{grupo.group.properties.nome}}</strong>
+                        <p class="text-muted">{{grupo.group.properties.descricao}}</p>
+                        <hr>
+                    </div>
+                    <button class="btn btn-primary btn-block"><b>Ver mais</b></button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class = "box box-solid">
+                <div class = "box-header with-border">
+                    <h2 class="box-title"><b>Indicações</b></h2>
+                </div>
+                <div class = "box-body">
+                    <div class= "row">
+                        <div *ngFor="let depoimento of depoimentos;" class= "col-md-6">
+                            <div class="post">
+                                <div class="user-block">
+                                    <img class="img-circle img-bordered-sm" src="{{depoimento.sender.properties.foto}}" alt="User Image">
+                                    <span class="username">
+                                        <a >{{depoimento.sender.properties.nome}}</a>
+                                        <a class="pull-right btn-box-tool"> {{depoimento.depo.properties.area}}</a>
+                                    </span>
+                                    <span class="description">{{depoimento.depo.properties.date}}</span>
+                                </div>
+                                <p>{{depoimento.depo.properties.depo}}</p>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
