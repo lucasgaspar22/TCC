@@ -17,7 +17,10 @@
                             <b>Amigos</b> <a class="pull-right">{{num_friends}}</a>
                         </li>
                     </ul>
-                    <button class="btn btn-primary btn-block"><b>Adicionar</b></button>
+                    <button *ngIf="this.relacao.type === 'Nenhum'" (click)="askAsFriend()" class="btn btn-primary btn-block"><b>Adicionar</b></button>
+                    <button *ngIf="this.relacao.type === 'IS_FRIEND'"class="btn btn-danger btn-block"><b>Desfazer Amizade</b></button>
+                    <button *ngIf="this.relacao.type === 'ASKED_AS_FRIEND'" (click)="deleteSolicitation()" class="btn btn-default btn-block"><b>Cancelar Solicitação</b></button>
+
                 </div>
             </div>
 
@@ -31,7 +34,7 @@
                         <p class="text-muted">{{grupo.group.properties.descricao}}</p>
                         <hr>
                     </div>
-                    <button class="btn btn-primary btn-block"><b>Ver mais</b></button>
+                    <button *ngIf="num_group>5" class="btn btn-primary btn-block"><b>Ver mais</b></button>
 
                 </div>
             </div>
@@ -59,9 +62,52 @@
                             </div>
                         </div>
                     </div>
+                    <button *ngIf="num_group>5" class="btn btn-primary btn-block"><b>Ver mais</b></button>
+
                 </div>
             </div>
         </div>
-
     </div>
+
+    <button *ngIf="relacao.type === 'IS_FRIEND'" class="fixed-button wobble" type="button"  data-toggle="modal" data-target="#myModal" >  
+        <i class="fa fa-edit fa-2x"></i>
+    </button>
 </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Escrever uma Indicação</h4>
+        </div>
+        <div class="modal-body">
+            <form #form="ngForm" novalidate>
+
+                <div class = "form-group has-feedback" [class.has-success] = "area.valid && (area.dirty || area.touched)" [class.has-error] = "!area.valid && (area.dirty || area.touched)">
+                    <label>Área</label>
+                    <select name= "area" #area="ngModel" ngModel required class="form-control">
+                        <option value = "Acadêmica" >Acadêmica</option>
+                        <option value = "Profissional" >Profissional</option>
+                    </select>
+                    <span class= "help-block" *ngIf="!indicacao.valid && (indicacao.dirty || indicacao.touched)"> <i class="fa fa-remove"></i> Ops</span>
+                    <span class= "help-block" *ngIf="indicacao.valid && (indicacao.dirty || indicacao.touched)"> <i class="fa fa-check"></i> Ok</span>
+                </div>
+
+                <div class="form-group has-feedback" [class.has-success] = "indicacao.valid && (indicacao.dirty || indicacao.touched)" [class.has-error] = "!indicacao.valid && (indicacao.dirty || indicacao.touched)">
+                    <label>Indicação</label>
+                    <textarea name= "indicacao" #indicacao="ngModel" ngModel required class="form-control" rows="6" minlength = "0" maxlength="458"></textarea>
+                    <span class= "help-block" *ngIf="!indicacao.valid && (indicacao.dirty || indicacao.touched)"> <i class="fa fa-remove"></i> Ops</span>
+                    <span class= "help-block" *ngIf="indicacao.valid && (indicacao.dirty || indicacao.touched)"> <i class="fa fa-check"></i> {{form.value.indicacao.length}} de 458</span>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="sendIndication(form.value)" data-dismiss="modal">Enviar Indicação</button>
+        </div>
+      </div>
+    </div>
+  </div>

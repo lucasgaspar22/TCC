@@ -11,9 +11,10 @@ import { PerfilService } from './perfil-service.service';
   styleUrls: ['./perfil.component.css']
 })
 
-export class PerfilComponent implements OnInit, AfterViewInit {
+export class PerfilComponent implements OnInit{
 
   id:any;
+  id_logado:number;
   usuario:any = {};
   depoimentos: any[] = [];
   grupos: any [] = [];
@@ -24,9 +25,11 @@ export class PerfilComponent implements OnInit, AfterViewInit {
   num_friends:number = 0 ;
   relacao:any;
 
+
   constructor(private perfilService:PerfilService, private http:HttpClient, private route:ActivatedRoute, private toastr:ToastrService) { }
 
    ngOnInit() {
+    this.id_logado = JSON.parse(localStorage.getItem('user')).node._id;
     this.pag_depo = 0 ;
     this.pag_group = 0;
     this.num_depo = 0 ;
@@ -51,7 +54,6 @@ export class PerfilComponent implements OnInit, AfterViewInit {
       for( let index = 0; index< res.length; index++ ){
         this.grupos.push(res[index]);
       }
-      console.log(this.grupos);
     });
 
     //Pega o número total de depoimentos que um usuário tem 
@@ -69,18 +71,76 @@ export class PerfilComponent implements OnInit, AfterViewInit {
       this.num_friends = res[0].friends;
     });
 
+    //Pega a relação entre o usuário logado e o usuário do perfil
+    this.perfilService.getUserProfileRelation(this.id,this.id_logado).subscribe(res =>{
+      if(res.length > 0){
+        this.relacao = res[0].rel;
+      } else {
+        this.relacao.type = 'Nenhum';
+      }
+    })
 
   }
 
-  ngAfterViewInit(){
-  }
-
+  // Função que pega o ID que está na URL
   getUserId():number{
     var id;
     this.route.params.subscribe( params => {
       id = Number(params.id);
     });
     return id;
+  }
+
+  // Função que cria uma relação ASK AS FRIEND entre dois nós
+  askAsFriend(){
+    this.perfilService.askAsFriend(this.id, this.id_logado).subscribe(res=>{
+      if(res.length>0){
+        this.relacao = res[0].rel;
+        this.toastr.success("A solicitação foi enviada!", "Sucesso!");
+      }else{
+        this.toastr.error("Algo deu errado", "Ops");
+      }
+    });
+  }
+
+  // Função que deleta uma amizade
+  deleteFriendship(){
+    this.perfilService.deleteFriendship(this.id, this.id_logado).subscribe(res=>{
+      if (res.length === 0 ){
+        this.toastr.success("Amizade cancelada","Consguimos");
+        this.relacao.type = "Nenhum";
+      }else{
+        this.toastr.error("Não conseguimos desfazer a amizade","Ops");
+      }
+    })
+  }
+
+  //Função que deleta uma solicitação de amizade
+  deleteSolicitation(){
+    this.perfilService.deleteSolicitation(this.id,this.id_logado).subscribe(res=>{
+      if(res.length === 0){
+        this.relacao.type = "Nenhum";
+        this.toastr.success("A solicitação foi cancelada", "Deu certo");
+      }else{
+        this.toastr.error("Não conseguimos cancelar","Vish");
+      }
+    })
+  }
+
+  sendIndication(form:any){
+
+    let depo ={
+      "area":form.area,
+      "depo":form.indicacao
+    }
+
+    this.perfilService.sendIndication(this.id_logado, this.id, depo).subscribe(res =>{
+      if(res.length>0){
+        this.toastr.success("Sua indicação foi enviada","Deu certo!");
+      }else{
+        this.toastr.error("Algo acaonteceu...","Deu ruim");
+      }
+    });
   }
 
 

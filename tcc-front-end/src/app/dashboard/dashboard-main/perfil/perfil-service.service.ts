@@ -42,4 +42,35 @@ export class PerfilService {
 
     return this.http.get<any[]>(url_count_friends);
   }
+
+  getUserProfileRelation (idProfile:number, idLogado:number){
+    let url_get_relation = `http://localhost:3003/API/user/get_relation/${idProfile}/${idLogado}`;
+
+    return this.http.get<any[]>(url_get_relation);
+  }
+
+
+  askAsFriend(idProfile:number, idLogado:number){
+    let url_ask_as_friend = `http://localhost:3003/API/asked_as_friend/${idLogado}/${idProfile}`;
+
+    return this.http.post<any[]>(url_ask_as_friend,{});
+  }
+
+  deleteSolicitation(idProfile:number,idLogado:number){
+    let url_delete_solicitaion = `http://localhost:3003/API/asked_as_friend/${idProfile}/${idLogado}`;
+
+    return this.http.delete<any[]>(url_delete_solicitaion);
+  }
+
+  deleteFriendship(idProfile:number,idLogado:number){
+    let url_delete_friendship = `http://localhost:3003/API/is_friend/${idProfile}/${idLogado}`;
+    
+    return this.http.delete<any[]>(url_delete_friendship);
+  }
+
+  sendIndication(idLogado: number, idPerfil:number, indicacao:any){
+    let url_send_depo = `http://localhost:3003/API/depoimento/${idLogado}/${idPerfil}`;
+
+    return this.http.post<any[]>(url_send_depo,indicacao);
+  }
 }
