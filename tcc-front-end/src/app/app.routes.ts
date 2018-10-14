@@ -6,6 +6,8 @@ import { DashboardMainComponent } from './dashboard/dashboard-main/dashboard-mai
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { BuscaComponent } from './dashboard/dashboard-main/busca/busca.component';
 import { PerfilComponent } from './dashboard/dashboard-main/perfil/perfil.component';
+import { GruposComponent } from './dashboard/dashboard-main/grupos/grupos.component';
+import { GrupoDetalhesComponent } from './dashboard/dashboard-main/grupo-detalhes/grupo-detalhes.component';
 
 export const ROUTES:Routes=[
     {path:"", component:LoginComponent},
@@ -14,6 +16,8 @@ export const ROUTES:Routes=[
     children:[
         {path:'', component:DashboardMainComponent},
         {path:'busca', component:BuscaComponent },
-        {path:'perfil/:id', component: PerfilComponent}
+        {path:'perfil/:id', component: PerfilComponent},
+        {path:'grupos', component: GruposComponent},
+        {path:'grupo/:id', component: GrupoDetalhesComponent}
     ]}
 ]

@@ -16,6 +16,21 @@ router.get('/:idU/:pag', (req,res,next)=>{
     db(query,res);
 });
 
+router.get('/creator', (req,res)=>{
+    let idG = 414
+    let query = `MATCH (n:Group)<-[rel:CREATED]-(n2:User) WHERE id(n)=${idG} RETURN n,rel,n2`;
+    db(query,res);
+});
+
+
+router.get('/cria/:id',(req,res,next)=>{
+    let idG = parseInt(req.params.id);
+    let query = `MATCH (user:User)-[rel:CREATED]->(group:Group)
+                 WHERE id(group) = ${idG} 
+                 RETURN user,rel, group`; 
+    db(query,res)
+});
+
 // Método para voltar todos os membros de um grupo
 router.get('/members/:idG/:pag',(req,res,next)=>{
     let idG = parseInt(req.params.idG);

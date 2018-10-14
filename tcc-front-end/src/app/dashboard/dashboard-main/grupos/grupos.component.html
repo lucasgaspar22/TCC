@@ -1,0 +1,83 @@
+<section class = "content">
+  <div class = "box box-solid">
+    <div class = "box-header with-border">
+        <h2 class="box-title"><b>Grupos</b></h2>
+    </div>
+    <div class = "box-body">
+      <div class = "row">
+        <div *ngFor="let grupo of grupos;" class= "col-md-4">
+          <div class="post">
+            <div class="user-block"> 
+              <img *ngIf="grupo.group.properties.area == 'Profissional'" class="img-circle img-bordered-sm" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxASEBUTEA8VEBIQGBUOFRUOFw8VFRUVFxUXFhUYGBUYHSggGBolGxYWITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0NDg0NDisZFRkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOEA4QMBIgACEQEDEQH/xAAcAAEAAgIDAQAAAAAAAAAAAAAAAQcGCAIEBQP/xABNEAABAwICBwMGCAwEBQUAAAABAAIDBBEhMQUGBxJBUWETcYEUIjKRobEjUmJygpKy8TNCQ1NVc4OTosLR0hYkwdMIFTSjwxclRGOz/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwC70vyQ8go6D7kEk8AhPAZqMsBmmXUlBJNupQm3eoy6kplic0E3tml+JUdT9y4yyNa0vkcGNaN4l5ADRzJOAQcweJwQH1KudZNrlHDdtK01jxhdp3Ib/PIu76II6qtdO7RNJ1Vw6o7Bh/EpAYxb51y8/W8EGwGlNPUlNjU1MUHISvY1zu5pNz4LFNIbWtFx3DHyzkfmY3C/cZN0LX85knEuxJOZPMniiC46vbZGPwOj3u/XSsj+y166Ltts/DR8Y75nn/xhVUiirUbtsn46PjP7Z4/kXdpNtrT+F0c5v6qZr/Y5jVTyIL8oNr2jH/hO2gJ/Ox7w9cZdgsq0TrNQ1OFPVxSuz3GPbv8A1D5w9S1ZUED/AFVRt5fiUB4nBazaE150lS2EVU57B+Tqbys7vOO8B80hWVq7thp5CG10RpnZb8W9JETzItvN/iHVBZ4PgEBv3L4UdXHOwSQyNlidi10bmua7xC+2fd70Eg37kvyUZ4BOg+5BJPAITwGajLAJlliSgknxKm645dSVIFs80EqVClBxJ4BRlgM1JPLNRl1JQMupKZdSUy6kplic0DLE5p1P3IcMXYWxxyAVP7QdqRJdT6NfYYtfUt9oh/v9XxkGX66bQqWguz/qKm1xDGcGcjK/JndienFUlrPrZWV7r1M12Xu2KPzYmcrN/GPV1z7l4jiSSSSSSSSbkknMk8SoUUUxsLnBrQXOOTWgknuAxKynZ/qZJpKYguMdPFbtZBa9zkxl8N4jHoMeIBvGCj0boqnLmtjpIm2D5Hem85AF2LpHHlieSDXqLVjSDhdtBUkfqZv7Vz/wnpL9H1P7mX+itut2yaPabRQ1Ew+M1kbG/wAbw71tXSdtrpx6NDL9J8Q911UVj/hPSX6Pqf3Mv9E/wnpL9H1P7mX+isn/ANbIxlo9/jM3+xcRtsb+jneM4/21BXH+E9Jfo+p/cy/0Q6p6S/R9T+5l/orGbtsb+jj+/H+2uQ22Mvjo9375v9iCtzqnpL9H1P7mX+i4yaraRaLnR9SB+pm/orPbtrgvjQy+EkZ94C7dNtmoHOAkp6mMc92FzR32fveoFUUjPC9jt2Rjo3fFka5rvqnFcFs7Tz6O0tASOzq4ciHt85jrXxDgHRu9RVNbSNQzo9wmgLn0kh3QXYuiecmuPFp4O8DjYmKxrQOn6qifv0szoicXNzjf0ew4HlfPkQrp1L2nU9YWw1AFLUOwFz8FIfkOPouPxXeBKoNCEG3XQfcmWAVHbP8AadJTbsFc4y0/otlN3SRct7i9ntHUYC7aedj2NfG4SNeA9rmEEOBxBBGYVR9MssSUy6kpl1JTLE5oGWJzUgcSo6lSBxKCVKi6lBxJt3lRl1JUk271GWJzQMsTmmWLsLexOp+5VDtg13N3UFM/pUvaf+yD9r6vNB5W07aGaoupaN9qYebJI3Oc8QD+a+13Z1wiKKKCbKUIQbMbP9Dil0dBEBZ7mCaUjjJIA52PG190Hk0LGtuOi5JaKOWMFzaSTtJGjgxzS3f8DbuDnFZLs90t5Voymfe72sEMh5Pj8x3rtfuIWQSMaWlhaHBwLSHAEEHA3HEKo1HRWdrtsomic6XRw7aI+d2F/hY+jL+m3p6XzlWk0TmOLHsdG9ubZA5rh3tdiFFcEREBERARS1pJDQCXOwAbcknkAMyrA1M2W1VS5slW11LT4EtcLTSDkGn8H3ux6cUHv7BtFSBtRUu82KXcgZ8ssLi49wLrX57yszTujGVVNLTvHmSsMZPxTbzSOoNj4LsUVJHFG2KFgjjiAY1rcgBkB/VdfTuk20tNLO70YGOk7yB5re8mw8VUaqPjc0lrxZzSWuHJwNiPWFCFxOLjdxxJ5k4k+tFFFm2znXyTR8gimJfRvPnNxJhJzewcubeOYxzwlEG21NOx7GyMeJGyAPa5hBDmkXBaeIX06lUXsm138lkFJUv/AMtKbRud+RkccujHE+Bx4lXp1KqHUqRjiclGeJyUjHu96DldERBxOGKjqfuUnmVxe4AFzzutaC43yAGJJQYltK1r8gpLsI8pnvHC0/i/GkI5NB9ZaOK10c4kkkkkkuJOJJJuSTxJK97XnWJ1fWyTXPZj4KFp/FiaTY25uN3H51uAXgKKIiICIiCzth+sPZzyUbzZtT8LFfhK0ecPpMF/2fVXZl1JWpVJVPikZLE7ckic2RjuTmm47xcZLaHVjTcdZSRVMf5Uec3MteMHs8HAj2qo9TLqSujpXQ1LUttVU8c44do1riPmk4jwXeyxOa+dROyNjpJXhjGAuc55Aa0DMknJBgmktkOjJLmMzUxztE/eb6pQ4+AIWD6ybO6OkNn6aiidbeEc8d5LfNjeXeO6u9rztWklLodHExR5Gciz3c+zB9AfKPncrZqrXzXJLn7znG5Ljck8SScSeqDPNXdRaKqcGt05AXHKNkb2yHubK5pPqWd6N2PaOYbyvnqOj3iNvqjAcPrKh98cx6wrE1J2oVFNaKsLqqnwAdnNGOjj+Eb0OPI8FBcuh9X6OmwpaaOHm5jRvu73nzj4lenngF1tG6QhqImy08jZIni4ezLu6HmDiF2eg+5UOg+5VTtz0+Gxx0MZxktUTW4Mafg2nvcC76A5qzdJV8dPC+WR26yJpkceQAue88gtXdPaWkq6mWol9KZxfbPdbkxo7mgDwQdBERRRERAIV8bIdbjVwGmnfeopQN0k4yQ5Ncebm+ifoniqHXf0BpeSjqY6iL0onbxHB7cnsPQtuPbwQbV593vU3v3LraNrmVELJojeOVrZGnmCL+HVdm/LJVHJFFlKDiRxPBV9tn0/2FD2DTaStJiwz7JtjKe43az6asEjnktddrOmPKdJyAG7KYClZyu25kPfvlw+iEGHIiKKIiICIiArE2M6z+T1RpZXfA1ZG5fJk+Q+uLN7wzqq7S54EgjEEEgg8CCMig2t0xpWClhdPUyCONguScTfg1oGLnHgBiVr9r1r1PpF+7jDStN2Q3xJGTpCMHO6ZDhfM+ZrNrRV17mGpk3hE0Ma1uDQbWc+3x3Zk+AsMF4yC0NjOqdNUiWqqY2zCJ4hjjkALN7dD3Pc04O9JoF8sTytcA0ZTn/48VvmR/0VfbB7GhnF8qgkj9lGrLz7veqjq/8ALac/kIrfMjx9irLbHqlSspvLKeJsMkb2MlEQDWyNe7dBLRhvhxGPEXvfC1r54BYTtkeBoiUc3wD/ALzD/ogprU/W2p0dLvwnejf+EhcTuPHP5L+Th43GC2E1Y1jp6+nEtM6/B7H2D43cWvHA9cjmLhauL1NXNP1FDOJqZ+670XNdcskb8V7eI9o4KKsXbdrNctoInYN3Zqgjic44z7Hn6CqZfWrqXyyPkkcXPkc6RzjmXONyV8kBERAREQEREFy7C9PF0UtE92MV6iK/5tx+EaO55B/aK1r8AtX9StLmkr4J96zWvDJP1b/MffoAd7vaFtADwCqJspUKUHS0xXCCnlnd6MEb5j13Gl1vYtUZJHOJc83e8l7jzc43cfWSthtr9aY9EzAGxlMcHfvPG8Pqhy13QERFFEREBERAREQEREGa7LdbW0FS5k5tTVO617sfg3tvuP8Am4kHwPBbBxSte0GNwcxwDg5hBBBysRge9ajrKNR2aXleYtGTSsDfOfZ5bCy98XA3aCTfIEnHDA2qNkibYDC2Z5Kjtr+uMdU5tLSvD4YHdpJI03bJLYgBp4taCcciThlj5OvVPpyBoZpGokkhk80GOQuhcbHzXBobjbGzhjwvY2wxAREUUREQEREBERAREQQRfPjgtndQtKeU6NppSbvdGGPPN8d43n6zSfFaxq8thNbvUMsRzhmNh8l7Gu+1voiy0UKVRV+3ue1JTsH405eeu7E8W9bx6lSSt7/iAk/6JvPyl3q7AfzKoVFEREBERAREQEREBERAWxOyXRrYNFQkAb9Teqeee+fMv9AMC12DHOwaLud5rRzJwA9a2x0ZSNggihYMImMhAHJjQ0e5VHn646KbU0FRARvOfG5zL8JGjejPg4BautNwDwOK27y6krVPT1D5PVzw23RDLJGAMt0PO5/DZB0URFFEREBERAREQEREBWtsBqLTVbOBZC8d4dID9oepVSrI2ESW0hM3nTud6pYh/MgvRSoUqop//iBjxoncvKW/W7A/yqoldm3uC9JTv+LOWnudE8+9gVJqKIiICIiAiIgIiICIiD3NRqLt9JUkdrgzMee6P4U+xhWz2XUlULsRot/STpLXFPC9w6PeWsb/AAmRX1lic1UMsTmteNr9F2WlpTa3bsiqPW3sz7Yyth+pVO7fKI9pSz29JslO48fNLXsH8UiCp0RFFEREBERAREQEREBWRsIZ/wC4TO+LTub65Yv7VW6tbYDT3mq38Gshj8XOkJ+yPWgua6lRdSqjCtr9F2miZiM4jHOO5rwHfwuctd1thpmgbPTzQuynjfAe57S3D1rVGSNzSWvFnMJY4cnNNnDwIKDiiIooiIgIiICIiAiIgubYJR7sFTORjJIyAdRG3eNvGT2K1OpWH7JKHsdEQF2cvaVB7nvO5/AGLMOpVQ6lYFtrou00WZLY08sco7nExH/9FnueJyXja5UJqNH1UTRi+GTcvxeGlzP4gEGryKAfapUUREQEREBERAREQFeWwmhLaGWU/lpiB1axrW/aL1RhNls5qBos02jaaIjdcIxI8fLkJkePBziPBUZEiIiOJ5la6bV9EeTaTlIbZlSBVt5XfcSDv3w4/SHNbFkcTwVe7aNBeUUPlDW+fREydTC6wl8BZru5hQUMiIooiIgIiICIiAoecDZSvpTC72jm5o9oQbVaEoxDTQxAWEMUcQHINYG/6LuZ4nJLc8gmfd71UM+73oce73pn3e9M8Bkg1P0pS9jUTRAWEMssIHRj3NHsC6q9vXdoGk6sDLt5ftErxFFEREBERAREQEREHtal6H8rr4ILXa54fJy7Nnnvv3gbve4LaEchkFU+wvQFo5a14xlvTRH5DTeQjveAP2ZVsX4BVHKyKLKUHEjnkFwkYHghwu1wLSDk4HAg9FzIv3KM+73oNYtdtXnUFbJBY9n+EhcfxonE7uPEtxaerb8V4S2L2maqf8wpfgmjymnvJEfjfHivycB4EN6rXVzSCQQQQSCDcEEYEEcCoqEREBERAREQE393zhm3zvViiFBtvA/fa1w9FwDh1uLrnn3e9eBqBpDyjRlLJe57JsTyOL4/g3/xMK9/PAZKoZ4DJOgToPuXV0rWtp4JZXYNhjfM48gxpcfcg1i1pn36+qfmHTz26gSOA9gXmIXucd5xu53nOPMnE+1FFEREBERAREQF39A6Jkq6mKniHnzO3b2uGNze89GtBPhbivPJV77INUTSwGpmbaoqQN0OGMUOBA6OcbOPTdHAoM70bQxwQxwQjdZC1sbe4C3iTmu10CjoFOWHFVEqVClBxIv3KM8ApPJR0H3IHQfcqf2waj2Lq+lbcHzqljeH/wBwH2vrfGKuDLAI4C1rXvgQePf0QaiorF2nbPTSF1TSMvSnzpGN/IHiQPzX2e7KulFEREBERAREQXPsI0vvQTUjjjE4VDPmSYOA7nC/01afQfctadnWmPJNJQSE7rJD5NIfkS2GPQODHfRWy3QKodAsD2zaWEGjTED59W4Q9dwedIe6wDfprPMsBmqA2y6X7fSPZNN2Ubex/aOs+Q/Yb9BBgiIiiiIiAiIgIizPZ1qJJpCQSSgso2Gzni4MpGbGH3u4ZDHIPR2UajmrlFVUM/y0RuxrsppAfaxpz5nDgVe/QL5U1OyJjYomBjIwGNawANa0CwAC+mWAzVQywGakYd5UZdSVIwzzKCVKhSg4k8AoywCkngM1GWWJKBlliSmXUlMupKZYnNBDmix3he+BB49LKndoOy0s3qjRzLt9J9M3NvMw8x8j1cArj6lOpQaikcOIwN8wRmEWxGumzulr7yt/y1T+cYBZ/wCtZ+N3ix62wVIayar1lA+1TCQ0mzZWXdE/ufwPQ2PRRXjIiICIiCCL5rZXZ1rB5bo+KQnemYOwm59owAbx+cN130lrWsr2d64HRtSXOBfTzAMla3MWvuvaD+MLnDiCeQQX7rJphlFSS1D8eyaXAHDfecGN8XEDxWrU8z5Hue87z5HOke7m5xLnHxJKzfabryNIOZFT7wpoj2l3jdMslrAlvBrQTYHiSTwWCoCIiAiIgKCea9LQWgqqsk7OlhdK78YjBjOr3nBvvPAFXRqVsvp6QtlqSKqoGIuPgYj8lp9J3yneACDC9n+zOWqLZ61roab0mxm7ZJhwvxYzrmeFs1eNPAyNjY4mNYxgDGtYAGtaMgAMl9TyCjLAZqoZYDNMupKZdSUyzxJQMs8SVIHE5qMsSpA4lBKlEQcSfWVGXUlcioAtic0EZYnNOpUgcSgHEoI6lM8TkptfPJLX7vegjPu964TwtkaWPaHsdg5rwCHDkQcwvoce5DyGSCt9Y9kVHMS6jeaR+e7i+Eno0m7PA2HJVnpzZ/pOlJ36YzMH5Sl+Fb9UeePFoWyh5BMsAg1EOZBzGBHEeCLajS2r1HUj/MUkU54OkY0uHUPzHgVilfsi0W/8GJoCfzUhcPVKHIKCRXDV7E2W+C0g5v62Jr/suaui/YpUcK+I98Ug/mKiqsRWk3YpU8a6Id0ch/mC7lJsTH5XSBP6qEN9rnlBUKgmyvrR+x/RrPwjp5/1jwwH92Gn2rKdE6q0FMb09HFGRhvhoMh/aOu72qo190JqVpKrsYaR4Yfyk/wUYHO7sXD5oKsnVzY7Awh1dMagjHs4d5kfcXem7w3VaRxw4IeQQdeio4oWCKCNsUbcA2Noa0eA4r79Ap6BMss0EZYDNMupKm1upQC3UoIyzxJTLEqQOJzQDiUEdT9ykY4lLXxKZ9yCbqURBCKUQQhUogFERAUBSiCAilEBQpRBCKUQQUKlEBERACgKUQQilEEIpRBClEQQVKIghERB/9k=" alt="User Image">
+              <img *ngIf="grupo.group.properties.area == 'Acadêmica'" class="img-circle img-bordered-sm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgDOXwhSVDXta62qOko4cKsxn22z2kJjxYS7ALkm_t58VBvFWS" alt="User Image">
+              
+              <span class="username"> 
+                <a (click) = "verGrupo(grupo.group._id)">{{grupo.group.properties.nome}} 
+                  <i *ngIf="grupo.rel.type == 'CREATED'" class= "fa fa-bookmark"></i>
+                </a>
+              </span>
+              <span class="description">
+                <a> {{grupo.group.properties.area}}</a>
+              </span>
+            </div>
+            <p>{{grupo.group.properties.descricao}}</p>
+            <hr>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="box-footer">
+      <a (click)="getMoreGroups()"style="text-align: center"> Ver mais</a>
+    </div>
+  </div>
+
+
+  <button class="fixed-button wobble" type="button"  data-toggle="modal" data-target="#myModal" >  
+      <i class="fa fa-plus fa-2x"></i>
+  </button>
+</section>
+
+<!-- MODAL -->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Cria um grupo</h4>
+        </div>
+        <div class="modal-body">
+            <form #form="ngForm" novalidate>
+                <div class = "form-group has-feedback" [class.has-success] = "area.valid && (area.dirty || area.touched)" [class.has-error] = "!area.valid && (area.dirty || area.touched)">
+                    <label>Área</label>
+                    <select name= "area" #area="ngModel" ngModel required class="form-control">
+                        <option value = "Acadêmica" >Acadêmica</option>
+                        <option value = "Profissional" >Profissional</option>
+                    </select>
+                    <span class= "help-block" *ngIf="!descricao.valid && (descricao.dirty || descricao.touched)"> <i class="fa fa-remove"></i> Ops</span>
+                    <span class= "help-block" *ngIf="descricao.valid && (descricao.dirty || descricao.touched)"> <i class="fa fa-check"></i> Ok</span>
+                </div>
+
+                <div class = "form-group has-feedback" [class.has-success] = "nome.valid && (nome.dirty || nome.touched)" [class.has-error] = "!nome.valid && (nome.dirty || nome.touched)">
+                  <label >Nome</label>
+                  <input type="text" name= "nome" #nome="ngModel" ngModel required class="form-control">
+                  <span class= "help-block" *ngIf="!nome.valid && (nome.dirty || nome.touched)"> <i class="fa fa-remove"></i> Ops</span>
+                  <span class= "help-block" *ngIf="!nome.valid && (nome.dirty || nome.touched)"> <i class="fa fa-check"></i> OK</span>
+                </div>
+                
+                <div class="form-group has-feedback" [class.has-success] = "descricao.valid && (descricao.dirty || descricao.touched)" [class.has-error] = "!descricao.valid && (descricao.dirty || descricao.touched)">
+                    <label>Descrição</label>
+                    <textarea name= "descricao" #descricao="ngModel" ngModel required class="form-control" rows="6" minlength = "0" maxlength="458"></textarea>
+                    <span class= "help-block" *ngIf="!descricao.valid && (descricao.dirty || descricao.touched)"> <i class="fa fa-remove"></i> Ops</span>
+                    <span class= "help-block" *ngIf="descricao.valid && (descricao.dirty || descricao.touched)"> <i class="fa fa-check"></i> {{form.value.descricao.length}} de 458</span>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="createGroup(form.value)" data-dismiss="modal">Criar Grupo</button>
+        </div>
+      </div>
+    </div>
+  </div>
