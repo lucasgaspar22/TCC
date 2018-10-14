@@ -24,7 +24,6 @@ export class GruposComponent implements OnInit {
       for( let index = 0; index< res.length; index++ ){
         this.grupos.push(res[index]);
       }
-      console.log(res)
     })
   }
 

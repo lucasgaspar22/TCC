@@ -30,7 +30,7 @@
                 </div>
                 <div class="box-body">
                     <div *ngFor="let grupo of grupos">
-                        <strong><i class="fa fa-cube margin-r-5"></i>{{grupo.group.properties.nome}}</strong>
+                        <strong (click)="verGrupo(grupo.group._id)"><i class="fa fa-cube margin-r-5"></i>{{grupo.group.properties.nome}}</strong>
                         <p class="text-muted">{{grupo.group.properties.descricao}}</p>
                         <hr>
                     </div>
@@ -52,7 +52,7 @@
                                 <div class="user-block">
                                     <img class="img-circle img-bordered-sm" src="{{depoimento.sender.properties.foto}}" alt="User Image">
                                     <span class="username">
-                                        <a >{{depoimento.sender.properties.nome}}</a>
+                                        <a (click)="verPerfil(depoimento.sender._id)">{{depoimento.sender.properties.nome}}</a>
                                         <a class="pull-right btn-box-tool"> {{depoimento.depo.properties.area}}</a>
                                     </span>
                                     <span class="description">{{depoimento.depo.properties.date}}</span>
