@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from "@angular/router";
 
 import { PerfilService } from './perfil-service.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-perfil',
@@ -26,7 +27,7 @@ export class PerfilComponent implements OnInit{
   relacao:any;
 
 
-  constructor(private perfilService:PerfilService, private http:HttpClient, private route:ActivatedRoute, private toastr:ToastrService) { }
+  constructor(private router:Router,private perfilService:PerfilService, private http:HttpClient, private route:ActivatedRoute, private toastr:ToastrService) { }
 
    ngOnInit() {
     this.id_logado = JSON.parse(localStorage.getItem('user')).node._id;
@@ -141,6 +142,16 @@ export class PerfilComponent implements OnInit{
         this.toastr.error("Algo acaonteceu...","Deu ruim");
       }
     });
+  }
+
+  verGrupo(id:number){
+    this.router.navigate(['/QuemIndica/grupo', id]);
+  }
+
+  verPerfil(id:number){
+    alert(id)
+    //this.ngOnInit();
+    this.router.navigate(['/QuemIndica/perfil',id])
   }
 
 

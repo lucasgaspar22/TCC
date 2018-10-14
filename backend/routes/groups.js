@@ -16,19 +16,32 @@ router.get('/:idU/:pag', (req,res,next)=>{
     db(query,res);
 });
 
-router.get('/creator', (req,res)=>{
-    let idG = 414
-    let query = `MATCH (n:Group)<-[rel:CREATED]-(n2:User) WHERE id(n)=${idG} RETURN n,rel,n2`;
-    db(query,res);
+router.get('/get/relation/type/:idU/:idG',(req,res,next)=>{
+    let idU= parseInt(req.params.idU);
+    let idG= parseInt(req.params.idG);
+
+    let query = `MATCH (user:User)-[rel]-(group:Group)
+                 WHERE id(user)= ${idU} and id(group)=${idG}
+                 RETURN rel`;
+    db(query,res)
 });
 
-
-router.get('/cria/:id',(req,res,next)=>{
+//Retorna o Criador do grupo junto com os detalhes do grupo
+router.get('/get/group/creator/:id',(req,res,next)=>{
     let idG = parseInt(req.params.id);
-    let query = `MATCH (user:User)-[rel:CREATED]->(group:Group)
-                 WHERE id(group) = ${idG} 
-                 RETURN user,rel, group`; 
-    db(query,res)
+     let query = `MATCH (user:User)-[rel:CREATED]->(group:Group)
+     WHERE id(group)=${idG}
+     RETURN user,rel,group`; 
+     db(query,res)
+});
+
+//Retorna o número de membros de um grupo
+router.get('/get/members/number/:id', (req,res,next)=>{
+    let idG=parseInt(req.params.id);
+    let query = `MATCH (user:User)-[rel:CREATED | :IS_MEMBER]->(group:Group)  
+                        WHERE id(group) = ${idG} 
+                        RETURN  COUNT(rel) as members`;
+    db(query,res);
 });
 
 // Método para voltar todos os membros de um grupo

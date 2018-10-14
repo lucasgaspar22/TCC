@@ -1,3 +1,110 @@
-<p>
-  grupo-detalhes works!
-</p>
+<section class = "content">
+  <div class="row">
+    <div class="col-md-3">
+        <div class="box box-primary">
+          <div class="box-body box-profile">
+            <img class="profile-user-img img-responsive img-circle" src="../../../../assets/images/academico.png" alt="Group area picture">            
+            <h3 class="profile-username text-center">{{selected_group.properties.nome}}</h3>
+            <p class="text-muted text-center">{{rel_group_creator.properties.data}}</p>
+            <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                    <b>Criador</b> <a class="pull-right">{{creator.properties.nome}}</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Membros</b> <a class="pull-right">{{num_membros}}</a>
+                </li>
+                <li class="list-group-item">
+                  <p>{{selected_group.properties.descricao}}</p>
+                </li>
+            </ul>
+            <button (click)="askMembership()" *ngIf="relation=='Nenhuma'" class="btn btn-primary btn-block"><b>Solicitar Participação</b></button>
+            <button (click)="deleteRelation('Você saiu do grupo!','Pronto')" *ngIf="relation=='IS_MEMBER'" class="btn btn-danger btn-block"><b>Sair do Grupo</b></button>
+            <button (click)="deleteRelation('Seu pedido foi cancelado com sucesso','Pedido Cancelado')" *ngIf="relation=='ASKED_MEMBERSHIP'" class="btn btn-default btn-block"><b>Cancelar Solicitação</b></button>
+            <button (click)="acceptInvitation()" *ngIf="relation=='INVITED'" class="btn btn-success btn-block"><b>Aceitar convite</b></button>
+            <button (click)="deleteRelation('Você recusou o convite','Convite Recusado')" *ngIf="relation=='INVITED'" class="btn btn-dander btn-block"><b>Recusar convite</b></button>
+            
+        </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class = "box box-solid">
+            <div class = "box-header with-border">
+                <h2 class="box-title"><b>Membros</b> <small> {{num_membros}} de {{num_membros}}</small></h2>
+            </div>
+            <div class = "box-body">
+                <div class= "row">
+                    <div *ngFor="let membro of membros;" class= "col-md-6">
+                        <div class="post">
+                            <div class="user-block">
+                                <img class="img-circle img-bordered-sm" src="{{membro.user.properties.foto}}" alt="User Image">
+                                <span class="username">
+                                    <a >{{membro.user.properties.nome}}</a>
+                                </span>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    
+                </div>
+                <button  class="btn btn-primary btn-block"><b>Ver mais</b></button>
+
+            </div>
+        </div>
+    </div>
+
+  </div>
+
+  <button *ngIf="relation=='CREATED'" class="fixed-button wobble" type="button"  data-toggle="modal" data-target="#myModal" >  
+      <i class="fa fa-user-plus fa-2x"></i>
+  </button>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Convidar uma pessoa</h4>
+        </div>
+        <div class="modal-body">
+            <form #form="ngForm" novalidate>
+                <div class="row">
+                    <div class = "col-md-9">
+                        <input type="text" name="email_name" #email_name="ngModel" ngModel required  class="form-control" placeholder="Digite o nome ou e-mail">
+                    </div>
+                    <div class = "col-md-3">
+                        <button [disabled]="!form.valid" type="button" class="btn btn-block btn-primary" (click)="search(form.value)">Buscar</button>
+                    </div>
+                </div>
+                
+              </form>
+              <hr>
+              <div class = "row" *ngIf="encontrou_usuarios">
+                <div class = "col-md-12" *ngFor="let usuario of usuarios; let i = index">
+                    <div  class="box box-widget widget-user-2">
+                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                        <div class="widget-user-header " [class.bg-blue] =" i%4 === 1 " [class.bg-red]="i%4 === 0" [class.bg-yellow]="i%4===2" [class.bg-green]="i%4 ===3">
+                          <div class="widget-user-image">
+                            <img class="img-circle" src="{{usuario.node.properties.foto}}" alt="User Avatar">
+                          </div>
+                          <!-- /.widget-user-image -->
+                          <h3 class="widget-user-username">{{usuario.node.properties.nome}}</h3>
+                          <h5 class="widget-user-desc">{{usuario.node.properties.profissao}}</h5>
+                        </div>
+                        <div class="box-footer no-padding">
+                          <ul class="nav nav-stacked">
+                            <button type="button" class="btn btn-block btn-default" (click)="inviteMember(usuario.node._id)">Convidar</button> 
+                          </ul>
+                        </div>
+                      </div>
+                </div>
+                  
+              </div>
+        </div>
+       <hr>
+      </div>
+    </div>
+  </div>
