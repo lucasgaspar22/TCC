@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from "@angular/router";
 import { GrupoDetalhesService } from './grupo-detalhes-service.service';
-import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 
 @Component({
   selector: 'app-grupo-detalhes',
@@ -27,7 +25,6 @@ export class GrupoDetalhesComponent implements OnInit {
 
   usuarios: any = [];
   encontrou_usuarios:boolean = false;
-
 
   constructor(private grupoDetalheService: GrupoDetalhesService, private route:ActivatedRoute, private toastr:ToastrService) {}
 
