@@ -21,11 +21,14 @@ import { BuscaComponent } from './dashboard/dashboard-main/busca/busca.component
 import { PerfilComponent } from './dashboard/dashboard-main/perfil/perfil.component';
 import { GruposComponent } from './dashboard/dashboard-main/grupos/grupos.component';
 import { GrupoDetalhesComponent } from './dashboard/dashboard-main/grupo-detalhes/grupo-detalhes.component';
+import { AmigosComponent } from './dashboard/dashboard-main/amigos/amigos.component';
 
 //APP SERVICES
 import { PerfilService } from './dashboard/dashboard-main/perfil/perfil-service.service';
 import { GruposService } from './dashboard/dashboard-main/grupos/grupos-service.service';
 import { GrupoDetalhesService } from './dashboard/dashboard-main/grupo-detalhes/grupo-detalhes-service.service';
+import { AmigosService } from './dashboard/dashboard-main/amigos/amigos.service';
+
 
 
 @NgModule({
@@ -40,7 +43,8 @@ import { GrupoDetalhesService } from './dashboard/dashboard-main/grupo-detalhes/
     BuscaComponent,
     PerfilComponent,
     GruposComponent,
-    GrupoDetalhesComponent
+    GrupoDetalhesComponent,
+    AmigosComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,11 @@ import { GrupoDetalhesService } from './dashboard/dashboard-main/grupo-detalhes/
     ToastrModule.forRoot(),
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [PerfilService,GruposService,GrupoDetalhesService],
+  providers: [
+    PerfilService,
+    GruposService,
+    GrupoDetalhesService,
+    AmigosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

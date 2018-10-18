@@ -8,45 +8,18 @@
         <p>{{user.nome}}</p>
       </div>
     </div>
-    <!-- <form class="sidebar-form">
-      <div class="input-group">
-        <input type="text" name="q" class="form-control" placeholder="Search...">
-        <span class="input-group-btn">
-          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-          </button>
-        </span>
-      </div>
-    </form> -->
       
     <ul class="sidebar-menu">
       <li class="header">Navegação Principal</li>
+      <li><a><i class="fa fa-home"></i> <span>Início</span></a></li>
       <li><a [routerLink]="['busca']"><i class="fa fa-search"></i> <span> Buscar pessoas</span></a></li>
       <li><a><i class = "fa fa-user"></i> <span>Perfil</span></a></li>
-      <li><a><i class="fa fa-home"></i> <span>Início</span></a></li>
-      <li class="treeview menu-open">
-          <a>
-            <i class="fa fa-certificate"></i> <span>Solicitações</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a><i class="fa fa-circle-o"></i> Amizade</a><span class="pull-right-container">
-                <small class="label pull-right bg-green">new</small>
-              </span></li>
-            <li><a><i class="fa fa-circle-o"></i> Depoimentos</a></li>
-            <li><a><i class="fa fa-circle-o"></i> Grupos</a></li>
-
-          </ul>
-          
-        </li>
-
-        <li> <a> <i class="fa fa-comments"></i> <span>Depoimentos</span></a></li>
-        <li> <a [routerLink]="['grupos']"> <i class="fa fa-tags"></i> <span>Grupos</span></a></li>
-        <li> <a> <i class="fa fa-users"></i> <span>Amigos</span></a></li>
-        <li class="header">Navegação Secundária</li>
-        <li> <a> <i class="fa fa-gear"></i> <span>Configurações</span></a></li>
-        <li class="bg-gray"> <a [routerLink]="['']" class="text-red"> <i class="fa fa-sign-out"></i> <span>Sair</span></a></li>
+      <li><a><i class= "fa fa-certificate"></i><span>Solicitações</span></a></li>
+      <li> <a> <i class="fa fa-comments"></i> <span>Indicações</span></a></li>
+      <li> <a [routerLink]="['grupos']"> <i class="fa fa-tags"></i> <span>Grupos</span></a></li>
+      <li> <a [routerLink]="['amigos']"> <i class="fa fa-users"></i> <span>Amigos</span></a></li>
+      <li class="header">Navegação Secundária</li>
+      <li class="bg-gray"> <a [routerLink]="['']" class="text-red"> <i class="fa fa-sign-out"></i> <span>Sair</span></a></li>
     </ul>
   </section>
 

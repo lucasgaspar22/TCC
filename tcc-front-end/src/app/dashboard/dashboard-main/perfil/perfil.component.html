@@ -18,7 +18,7 @@
                         </li>
                     </ul>
                     <button *ngIf="this.relacao.type === 'Nenhum'" (click)="askAsFriend()" class="btn btn-primary btn-block"><b>Adicionar</b></button>
-                    <button *ngIf="this.relacao.type === 'IS_FRIEND'"class="btn btn-danger btn-block"><b>Desfazer Amizade</b></button>
+                    <button *ngIf="this.relacao.type === 'IS_FRIEND'" (click)="deleteFriendship()"class="btn btn-danger btn-block"><b>Desfazer Amizade</b></button>
                     <button *ngIf="this.relacao.type === 'ASKED_AS_FRIEND'" (click)="deleteSolicitation()" class="btn btn-default btn-block"><b>Cancelar Solicitação</b></button>
 
                 </div>
