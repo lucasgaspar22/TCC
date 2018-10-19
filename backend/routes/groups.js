@@ -16,6 +16,7 @@ router.get('/:idU/:pag', (req,res,next)=>{
     db(query,res);
 });
 
+//Método para pegar a relação entre um grupo e um usuário
 router.get('/get/relation/type/:idU/:idG',(req,res,next)=>{
     let idU= parseInt(req.params.idU);
     let idG= parseInt(req.params.idG);
@@ -68,12 +69,24 @@ router.get('/ask_membership/:idG/:pag', (req,res,next) =>{
 
 //Método responsável por listar todos os convites recebidos por um usuário 
 router.get('/invite/:idU/:pag', (req,res,next) =>{
-    let idU = req.params.idU;
+    let idU = parseInt(req.params.idU);
     let pag = parseInt(req.params.pag);
     let pagina = pag*5;
     let query = `MATCH (group:Group)-[inv:INVITED]->(user:User) 
                 WHERE id(user) = ${idU} 
                 RETURN group,inv SKIP ${pagina} LIMIT 5`;
+
+    db(query,res);
+});
+
+//Método que retorna todos os pedidos enviados por um usuário
+router.get('/sent/:idU/:pag', (req,res,next)=>{
+    let idU = parseInt(req.params.idU);
+    let pag = parseInt(req.params.pag);
+    let pagina = pag*5;
+    let query = `MATCH (group:Group)<-[asked:ASKED_MEMBERSHIP]-(user:User) 
+                WHERE id(user) = ${idU} 
+                RETURN group,asked SKIP ${pagina} LIMIT 5`;
 
     db(query,res);
 });
@@ -135,7 +148,7 @@ router.put('/ask_membership/:idG/:idU',(req,res,next)=>{
    db(query,res);
 });
 
-//Método para um convidado aceitar um convite do grupo
+//Método para um convidado aceitar um convite do grupo 
 router.put('/invite/:idG/:idI',(req,res,next)=>{
     let idG = parseInt(req.params.idG);
     let idI = parseInt(req.params.idI);

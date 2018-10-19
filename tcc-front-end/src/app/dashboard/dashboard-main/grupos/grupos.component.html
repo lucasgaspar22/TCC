@@ -1,36 +1,117 @@
 <section class = "content">
-  <div class = "box box-solid">
-    <div class = "box-header with-border">
-        <h2 class="box-title"><b>Grupos</b></h2>
-    </div>
-    <div class = "box-body">
-      <div class = "row">
-        <div *ngFor="let grupo of grupos;" class= "col-md-4">
-          <div class="post">
-            <div class="user-block"> 
-              <img *ngIf="grupo.group.properties.area == 'Profissional'" class="img-circle img-bordered-sm" src="../../../../assets/images/profissional.jpg" alt="User Image">
-              <img *ngIf="grupo.group.properties.area == 'Acadêmica'" class="img-circle img-bordered-sm" src="../../../../assets/images/academico.png" alt="User Image">
-              
-              <span class="username"> 
-                <a (click) = "verGrupo(grupo.group._id)">{{grupo.group.properties.nome}} 
-                  <i *ngIf="grupo.rel.type == 'CREATED'" class= "fa fa-bookmark"></i>
-                </a>
-              </span>
-              <span class="description">
-                <a> {{grupo.group.properties.area}}</a>
-              </span>
+  <div class = "row">
+    <div class="col-md-12">
+      <div class = "box box-solid">
+        <div class = "box-header with-border">
+          <h2 class="box-title"><b>Grupos</b></h2>
+        </div>
+        <div class = "box-body">
+          <div class = "row">
+            <div *ngFor="let grupo of grupos;" class= "col-md-4">
+              <div class="post">
+                <div class="user-block"> 
+                  <img *ngIf="grupo.group.properties.area == 'Profissional'" class="img-circle img-bordered-sm" src="../../../../assets/images/profissional.jpg" alt="User Image">
+                  <img *ngIf="grupo.group.properties.area == 'Acadêmica'" class="img-circle img-bordered-sm" src="../../../../assets/images/academico.png" alt="User Image">    
+                  <span class="username"> 
+                    <a (click) = "verGrupo(grupo.group._id)">{{grupo.group.properties.nome}} 
+                      <i *ngIf="grupo.rel.type == 'CREATED'" class= "fa fa-bookmark"></i>
+                    </a>
+                  </span>
+                  <span class="description">
+                    <a> {{grupo.group.properties.area}}</a>
+                  </span>
+                </div>
+                <p>{{grupo.group.properties.descricao}}</p>
+                <hr>
+              </div>
             </div>
-            <p>{{grupo.group.properties.descricao}}</p>
-            <hr>
+                
           </div>
         </div>
-        
+        <div class="box-footer">
+          <a (click)="getMoreGroups()"style="text-align: center"> Ver mais</a>
+        </div>
       </div>
     </div>
-    <div class="box-footer">
-      <a (click)="getMoreGroups()"style="text-align: center"> Ver mais</a>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class = "box box-solid">
+        <div class = "box-header with-border">
+          <h2 class="box-title"><b>Convites Recebidos</b></h2>
+        </div>
+        <div class="box-body">
+          <div class = "row">
+            <div *ngFor="let pendente of convites_pendentes;" class= "col-md-12">
+              <div class="post">
+                <div class="user-block"> 
+                  <img *ngIf="pendente.group.properties.area == 'Profissional'" class="img-circle img-bordered-sm" src="../../../../assets/images/profissional.jpg" alt="User Image">
+                  <img *ngIf="pendente.group.properties.area == 'Acadêmica'" class="img-circle img-bordered-sm" src="../../../../assets/images/academico.png" alt="User Image">    
+                  <span class="username"> 
+                    <a (click) = "verGrupo(pendente.group._id)">{{pendente.group.properties.nome}} </a>
+                  </span>
+                  <span class="description">
+                    <a> {{pendente.group.properties.area}}</a>
+                  </span>
+                </div>
+                <div class = "row">
+                  <div class="col-md-6">
+                    <button  (click)="acceptSolicitation(pendente.group._id,pendente)" class="btn btn-block btn-primary"><b>Aceitar</b></button>
+                  </div>
+                  <div class="col-md-6">
+                    <button  (click)="refuseSolicitation(pendente.group._id,pendente.group)" class="btn btn-block btn-danger"><b>Recusar</b></button>
+                  </div>
+                </div>
+                <hr>
+              </div>
+            </div>
+                    
+          </div>
+        </div>
+        <div class="box-footer">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="box box-solid">
+        <div class="box-header with-border">
+          <h2 class="box-title"><b>Pedidos de participação enviados</b></h2>
+        </div>
+        <div class= "box-body">
+            <div class = "row">
+                <div *ngFor="let enviado of convites_enviados;" class= "col-md-12">
+                  <div class="post">
+                    <div class="user-block"> 
+                      <img *ngIf="enviado.group.properties.area == 'Profissional'" class="img-circle img-bordered-sm" src="../../../../assets/images/profissional.jpg" alt="User Image">
+                      <img *ngIf="enviado.group.properties.area == 'Acadêmica'" class="img-circle img-bordered-sm" src="../../../../assets/images/academico.png" alt="User Image">    
+                      <span class="username"> 
+                        <a (click) = "verGrupo(enviado.group._id)">{{enviado.group.properties.nome}} </a>
+                      </span>
+                      <span class="description">
+                        <a> {{enviado.group.properties.area}}</a>
+                      </span>
+                    </div>
+                    <div class = "row">
+                      <div class="col-md-12">
+                        <button  (click)="cancelSolicitation(enviado.group._id,enviado.group)" class="btn btn-block btn-default"><b>Cancelar Pedido</b></button>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+                        
+              </div>
+        </div>
+        <div class="box-footer">
+
+        </div>
+      </div>
     </div>
   </div>
+  
 
 
   <button class="fixed-button wobble" type="button"  data-toggle="modal" data-target="#myModal" >  

@@ -12,18 +12,56 @@ import { GruposService } from './grupos-service.service';
 export class GruposComponent implements OnInit {
 
   id_logado:number;
-  pagina:number;
+  pagina:number = 0;
+  num_grupos:number = 0;
   grupos:any[] =[];
+  convites_pendentes:any[] = [];
+  pagina_pendentes:number = 0;
+  num_pendentes:number = 0;
+  convites_enviados:any[] = [];
+  pagina_enviados:number = 0;
+  num_enviados:number = 0;
 
   constructor(private gruposService:GruposService, private toastr: ToastrService, private router:Router) { }
 
   ngOnInit() {
     this.id_logado = Number(JSON.parse(localStorage.getItem('user')).node._id);
     this.pagina = 0 ;
+    this.getNumbers();
+    
     this.gruposService.getAllGroups(this.id_logado,this.pagina).subscribe((res)=>{
       for( let index = 0; index< res.length; index++ ){
         this.grupos.push(res[index]);
       }
+      console.log(this.grupos)
+    });
+
+    this.gruposService.getRecievedInvitations(this.id_logado,this.pagina_pendentes).subscribe(res=>{
+      console.log(res)
+      for (let index=0 ;index<res.length; index++){
+        this.convites_pendentes.push(res[index]);
+      }
+    });
+
+    this.gruposService.getSentSolicitions(this.id_logado,this.pagina_enviados).subscribe(res=>{
+      console.log(res)
+      for(let index =0 ; index<res.length; index++){
+        this.convites_enviados.push(res[index]);
+      }
+    })
+  }
+
+  getNumbers(){
+    this.gruposService.getGroupNumber(this.id_logado).subscribe(res=>{
+      if (res.length>0) this.num_grupos = res[0].groups;
+    });
+
+    this.gruposService.getRecievedNumber(this.id_logado).subscribe(res=>{
+      if(res.length>0) this.num_pendentes = res[0].invites;
+    });
+
+    this.gruposService.getSentNumber(this.id_logado).subscribe(res=>{
+      if(res.length>0) this.num_enviados = res[0].asked;
     })
   }
 
@@ -43,6 +81,72 @@ export class GruposComponent implements OnInit {
       }
     })
 
+  }
+
+  acceptSolicitation(id_group:number,pendente:any){
+   console.log(pendente);
+    let grupo={
+      group:{
+        labels:['Group'],
+        properties:{
+          area:pendente.group.properties.area,
+          descricao:pendente.group.properties.descricao,
+          nome:pendente.group.properties.nome
+        },
+        _id:pendente.group._id
+      },
+      rel:{
+        type:"INVITED",
+        _fromId:pendente.inv._fromId,
+        _toId:pendente.inv._toId,
+        _id:pendente.inv._id,
+        properties:{date:pendente.inv.properties.date}
+      }
+    }
+
+
+    this.gruposService.acceptGroupInvitation(this.id_logado,id_group).subscribe(res=>{
+      console.log(res)
+      if(res.length>0){
+        grupo.rel.properties.date = res[0].rel.properties.date
+        grupo.rel._id = res[0].rel._id
+        grupo.rel._fromId = res[0].rel._fromId
+        grupo.rel._toId = res[0].rel._toId
+        let index = this.convites_pendentes.indexOf(grupo);
+        this.convites_pendentes.splice(index,1);
+        this.num_grupos++;
+        this.num_pendentes --;
+        this.grupos.push(grupo);
+        this.toastr.success("Convite aceito com sucesso!","Muito bom");
+      }
+      else{
+        this.toastr.error("Não conseguimos aceitar", "Ops");
+      }
+    });
+  }
+
+  refuseSolicitation(id_group:number,group:any){
+    this.gruposService.deleteGroupRelation(this.id_logado,id_group).subscribe(res=>{
+      if (res.length === 0 ){
+        this.toastr.success("Convite recusado","Consguimos");
+        this.num_pendentes--;
+        this.convites_pendentes.splice(this.convites_pendentes.indexOf(group),1);
+      }else{
+        this.toastr.error("Não consegumos recusar o convite","Ops");
+      }
+    })
+  }
+
+  cancelSolicitation(id_group:number,group:any){
+    this.gruposService.deleteGroupRelation(this.id_logado,id_group).subscribe(res=>{
+      if (res.length === 0 ){
+        this.toastr.success("Pedido cancelado","Consguimos");
+        this.num_enviados--;
+        this.convites_enviados.splice(this.convites_enviados.indexOf(group),1);
+      }else{
+        this.toastr.error("Não consegumos cancelar o convite","Ops");
+      }
+    })
   }
 
   getMoreGroups(){
