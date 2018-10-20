@@ -17,7 +17,7 @@
                             <b>Amigos</b> <a class="pull-right">{{num_friends}}</a>
                         </li>
                     </ul>
-                    <button *ngIf="this.relacao.type === 'Nenhum'" (click)="askAsFriend()" class="btn btn-primary btn-block"><b>Adicionar</b></button>
+                    <button *ngIf="this.relacao.type === 'Nenhum' && !is_my_profile" (click)="askAsFriend()" class="btn btn-primary btn-block"><b>Adicionar</b></button>
                     <button *ngIf="this.relacao.type === 'IS_FRIEND'" (click)="deleteFriendship()"class="btn btn-danger btn-block"><b>Desfazer Amizade</b></button>
                     <button *ngIf="this.relacao.type === 'ASKED_AS_FRIEND'" (click)="deleteSolicitation()" class="btn btn-default btn-block"><b>Cancelar Solicitação</b></button>
 
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    <button *ngIf="num_group>5" class="btn btn-primary btn-block"><b>Ver mais</b></button>
+                    <button *ngIf="num_group>5" class="btn btn-primary"><b>Ver mais</b></button>
 
                 </div>
             </div>

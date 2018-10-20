@@ -22,13 +22,14 @@ import { PerfilComponent } from './dashboard/dashboard-main/perfil/perfil.compon
 import { GruposComponent } from './dashboard/dashboard-main/grupos/grupos.component';
 import { GrupoDetalhesComponent } from './dashboard/dashboard-main/grupo-detalhes/grupo-detalhes.component';
 import { AmigosComponent } from './dashboard/dashboard-main/amigos/amigos.component';
+import { IndicacoesComponent } from './dashboard/dashboard-main/indicacoes/indicacoes.component';
 
 //APP SERVICES
 import { PerfilService } from './dashboard/dashboard-main/perfil/perfil-service.service';
 import { GruposService } from './dashboard/dashboard-main/grupos/grupos-service.service';
 import { GrupoDetalhesService } from './dashboard/dashboard-main/grupo-detalhes/grupo-detalhes-service.service';
 import { AmigosService } from './dashboard/dashboard-main/amigos/amigos.service';
-
+import { IndicacoesService } from './dashboard/dashboard-main/indicacoes/indicacoes.service'
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { AmigosService } from './dashboard/dashboard-main/amigos/amigos.service'
     PerfilComponent,
     GruposComponent,
     GrupoDetalhesComponent,
-    AmigosComponent
+    AmigosComponent,
+    IndicacoesComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,9 @@ import { AmigosService } from './dashboard/dashboard-main/amigos/amigos.service'
     PerfilService,
     GruposService,
     GrupoDetalhesService,
-    AmigosService],
+    AmigosService,
+    IndicacoesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

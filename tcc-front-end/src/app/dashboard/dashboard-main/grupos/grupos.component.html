@@ -29,21 +29,21 @@
           </div>
         </div>
         <div class="box-footer">
-          <a (click)="getMoreGroups()"style="text-align: center"> Ver mais</a>
+          <button *ngIf="showGetMoreGroups()" (click)="getMoreGroups()" class="btn btn-primary"> Ver mais</button>
         </div>
       </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class = "box box-solid">
         <div class = "box-header with-border">
           <h2 class="box-title"><b>Convites Recebidos</b></h2>
         </div>
         <div class="box-body">
           <div class = "row">
-            <div *ngFor="let pendente of convites_pendentes;" class= "col-md-12">
+            <div *ngFor="let pendente of convites_pendentes;" class= "col-md-4">
               <div class="post">
                 <div class="user-block"> 
                   <img *ngIf="pendente.group.properties.area == 'Profissional'" class="img-circle img-bordered-sm" src="../../../../assets/images/profissional.jpg" alt="User Image">
@@ -57,10 +57,10 @@
                 </div>
                 <div class = "row">
                   <div class="col-md-6">
-                    <button  (click)="acceptSolicitation(pendente.group._id,pendente)" class="btn btn-block btn-primary"><b>Aceitar</b></button>
+                    <button  (click)="acceptSolicitation(pendente)" class="btn btn-block btn-primary"><b>Aceitar</b></button>
                   </div>
                   <div class="col-md-6">
-                    <button  (click)="refuseSolicitation(pendente.group._id,pendente.group)" class="btn btn-block btn-danger"><b>Recusar</b></button>
+                    <button  (click)="refuseSolicitation(pendente)" class="btn btn-block btn-danger"><b>Recusar</b></button>
                   </div>
                 </div>
                 <hr>
@@ -70,46 +70,12 @@
           </div>
         </div>
         <div class="box-footer">
+            <button *ngIf="showGetMorePendentes()" (click)="getMorePedidos()" class="btn btn-primary"> Ver mais</button>
 
         </div>
       </div>
     </div>
 
-    <div class="col-md-6">
-      <div class="box box-solid">
-        <div class="box-header with-border">
-          <h2 class="box-title"><b>Pedidos de participação enviados</b></h2>
-        </div>
-        <div class= "box-body">
-            <div class = "row">
-                <div *ngFor="let enviado of convites_enviados;" class= "col-md-12">
-                  <div class="post">
-                    <div class="user-block"> 
-                      <img *ngIf="enviado.group.properties.area == 'Profissional'" class="img-circle img-bordered-sm" src="../../../../assets/images/profissional.jpg" alt="User Image">
-                      <img *ngIf="enviado.group.properties.area == 'Acadêmica'" class="img-circle img-bordered-sm" src="../../../../assets/images/academico.png" alt="User Image">    
-                      <span class="username"> 
-                        <a (click) = "verGrupo(enviado.group._id)">{{enviado.group.properties.nome}} </a>
-                      </span>
-                      <span class="description">
-                        <a> {{enviado.group.properties.area}}</a>
-                      </span>
-                    </div>
-                    <div class = "row">
-                      <div class="col-md-12">
-                        <button  (click)="cancelSolicitation(enviado.group._id,enviado.group)" class="btn btn-block btn-default"><b>Cancelar Pedido</b></button>
-                      </div>
-                    </div>
-                    <hr>
-                  </div>
-                </div>
-                        
-              </div>
-        </div>
-        <div class="box-footer">
-
-        </div>
-      </div>
-    </div>
   </div>
   
 

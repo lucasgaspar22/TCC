@@ -55,7 +55,7 @@ export class AmigosComponent implements OnInit {
     this.router.navigate(['/QuemIndica/perfil', id]);
   }
 
-  acceptSolicitation(id_user:number,user:any){
+  acceptSolicitation(user:any){
     let amigo = {
       node:{
         label:['User'],
@@ -79,16 +79,18 @@ export class AmigosComponent implements OnInit {
         }
       }
     }
-    this.amigosService.acceptSolicitation(id_user,this.id_logado).subscribe(res=>{
+    this.amigosService.acceptSolicitation(user.node._id,this.id_logado).subscribe(res=>{
       if(res.length>0){
         amigo.rel.properties.since = res[0].is_friend.properties.since
         amigo.rel._id = res[0].is_friend._id
         amigo.rel._fromId = res[0].is_friend._fromId
         amigo.rel._toId = res[0].is_friend._toId
         let index = this.pendentes.indexOf(user);
-        this.pendentes.splice(index,1);
         this.num_amigos++;
         this.num_esperando_aceitacao --;
+        if(index == 0 ) this.pendentes.shift();
+        else if (index === (this.pendentes.length - 1 ))  this.pendentes.pop();
+        else this.pendentes.splice(index,1);
         this.amigos.push(amigo);
         this.toastr.success("Amigo adicionado com sucesso!","Muito bom");
       }
@@ -98,24 +100,30 @@ export class AmigosComponent implements OnInit {
     });
   }
 
-  refuseSolicitation(id_user:number,user:any){
-    this.amigosService.refuseSolicitation(id_user, this.id_logado).subscribe(res=>{
+  refuseSolicitation(user:any){
+    this.amigosService.refuseSolicitation(user.node._id, this.id_logado).subscribe(res=>{
       if (res.length === 0 ){
         this.toastr.success("Pedido recusado","Consguimos");
         this.num_esperando_aceitacao--;
-        this.pendentes.splice(this.pendentes.indexOf(user),1);
+        let index = this.pendentes.indexOf(user);
+        if(index == 0 ) this.pendentes.shift();
+        else if (index === (this.pendentes.length - 1 ))  this.pendentes.pop();
+        else this.pendentes.splice(index,1);
       }else{
         this.toastr.error("Não recusar o pedido de amizade","Ops");
       }
     })
   }
 
-  cancelSolicitation(id_user:number,user:any){
-    this.amigosService.refuseSolicitation(id_user, this.id_logado).subscribe(res=>{
+  cancelSolicitation(user:any){
+    this.amigosService.refuseSolicitation(user.node._id, this.id_logado).subscribe(res=>{
       if (res.length === 0 ){
         this.toastr.success("Pedido cancelado","Consguimos");
         this.num_mandou_convite--;
-        this.pedidos.splice(this.pedidos.indexOf(user),1);
+        let index = this.pedidos.indexOf(user);
+        if(index == 0 ) this.pedidos.shift();
+        else if (index === (this.pedidos.length - 1 ))  this.pedidos.pop();
+        else this.pedidos.splice(index,1);
       }else{
         this.toastr.error("Não cancelar o pedido de amizade","Ops");
       }
@@ -148,6 +156,21 @@ export class AmigosComponent implements OnInit {
       }
     })
   }
+
+  showGetMoreFriends(){
+    if(this.num_amigos>5 && this.amigos.length<this.num_amigos) return true;
+    else return false;
+  }
+  showGetMoreSolicitationSent(){
+    if(this.num_esperando_aceitacao>5 && this.pendentes.length<this.num_esperando_aceitacao) return true;
+    else return false;
+  }
+
+  showGetMoreSolicitationsRecieved(){
+    if(this.num_mandou_convite>5 && this.pedidos.length<this.num_mandou_convite) return true;
+    else return false;
+  }
+
   getNumbers(){
     this.amigosService.getNumeroAmigos(this.id_logado).subscribe(res=>{
       if(res.length>0){

@@ -16,6 +16,7 @@ export class PerfilComponent implements OnInit{
 
   id:any;
   id_logado:number;
+  is_my_profile:boolean = false;
   usuario:any = {};
   depoimentos: any[] = [];
   grupos: any [] = [];
@@ -36,11 +37,16 @@ export class PerfilComponent implements OnInit{
     this.num_depo = 0 ;
     this.num_group = 0 ;
     this.relacao = {};
-    this.id = this.getUserId();
+
+    this.route.params.subscribe( params => {
+      this.id = Number(params.id);
+      if (this.id == this.id_logado) this.is_my_profile = true;
+    });
 
     //Pega o usuário com id passado no parâmetro
     this.perfilService.getUserById(this.id).subscribe(res=>{
       this.usuario = res[0].node.properties;
+      console.log(this.usuario)
     });
     
     //Pega os depoimentos do usuário com o id passado no parametro
@@ -88,6 +94,7 @@ export class PerfilComponent implements OnInit{
     var id;
     this.route.params.subscribe( params => {
       id = Number(params.id);
+      if (id == this.id_logado) this.is_my_profile = true;
     });
     return id;
   }
@@ -149,7 +156,7 @@ export class PerfilComponent implements OnInit{
   }
 
   verPerfil(id:number){
-    alert(id)
+    //alert(id)
     //this.ngOnInit();
     this.router.navigate(['/QuemIndica/perfil',id])
   }

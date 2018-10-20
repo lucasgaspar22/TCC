@@ -116,10 +116,28 @@ router.get('/get_depo_number/:id',(req,res,next)=>{
 //Retorna o número depoimentos escritos por um usuário
 router.get('/get_written_depo_number/:id', (req,res,next)=>{
     let id = parseInt(req.params.id);
-    let query = `MATCH (node:User)-[rel:WROTE]-:(depo:Depo) 
+    let query = `MATCH (node:User)-[rel:WROTE]->(depo:Depo) 
                  WHERE id(node) = ${id} 
                 RETURN COUNT (rel) as depos`
 });
+
+//retorna o número de depoimentos escritos que não foram aceitos
+router.get('/get_written_waiting_depo/:id', (req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (node:User)-[wrote:WROTE]->(depo:Depo)-[waiting:WAITING_CONFIRMATION]->(reciever:User)
+                WHERE id(node)=${id}
+                RETURN COUNT (waiting) as sent`;
+    db(query,res);
+}); 
+
+//retorna o número de depoimentos recebidos por um usuário que não foi aceito
+router.get('/get_recieved_waiting_depo/:id', (req,res,next)=>{
+    let id = parseInt(req.params.id);
+    let query = `MATCH (sender:User)-[wrote:WROTE]->(depo:Depo)-[waiting:WAITING_CONFIRMATION]->(node:User)
+                 WHERE id(node)=${id}
+                 RETURN COUNT (waiting) as recieved`
+    db(query,res);
+})
 
 //Retorna o número de grupos que um usuário faz parte
 router.get('/get_group_number/:id',(req,res,next)=>{

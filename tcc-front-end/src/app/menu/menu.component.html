@@ -1,25 +1,28 @@
 <aside class="main-sidebar">
   <section class = "sidebar" style="height: auto;">
-    <div class="user-panel">
-      <div class="pull-left image">
-        <img src="{{img_usuario}}" class="img-circle" alt="User Image">
+    <div *ngIf="is_logged">
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="{{img_usuario}}" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>{{user.nome}}</p>
+        </div>
       </div>
-      <div class="pull-left info">
-        <p>{{user.nome}}</p>
-      </div>
-    </div>
       
-    <ul class="sidebar-menu">
-      <li class="header">Navegação Principal</li>
-      <li><a [routerLink]="['/QuemIndica']"><i class="fa fa-home"></i> <span>Início</span></a></li>
-      <li><a [routerLink]="['busca']"><i class="fa fa-search"></i> <span> Buscar pessoas</span></a></li>
-      <li><a (click) = "perfil()"><i class = "fa fa-user"></i> <span>Perfil</span></a></li>
-      <li> <a [routerLink]="['amigos']"> <i class="fa fa-users"></i> <span>Amigos</span></a></li>      
-      <li> <a> <i class="fa fa-comments"></i> <span>Indicações</span></a></li>
-      <li> <a [routerLink]="['grupos']"> <i class="fa fa-tags"></i> <span>Grupos</span></a></li>
-      <li class="header">Navegação Secundária</li>
-      <li class="bg-gray"> <a [routerLink]="['']" class="text-red"> <i class="fa fa-sign-out"></i> <span>Sair</span></a></li>
-    </ul>
+      <ul class="sidebar-menu">
+        <li class="header">Navegação Principal</li>
+        <li><a [routerLink]="['/QuemIndica']"><i class="fa fa-home"></i> <span>Início</span></a></li>
+        <li><a [routerLink]="['busca']"><i class="fa fa-search"></i> <span> Buscar pessoas</span></a></li>
+        <li><a (click) = "perfil()"><i class = "fa fa-user"></i> <span>Perfil</span></a></li>
+        <li> <a [routerLink]="['amigos']"> <i class="fa fa-users"></i> <span>Amigos</span></a></li>      
+        <li> <a [routerLink]="['indicacoes']"> <i class="fa fa-comments"></i> <span>Indicações</span></a></li>
+        <li> <a [routerLink]="['grupos']"> <i class="fa fa-tags"></i> <span>Grupos</span></a></li>
+        <li class="header">Navegação Secundária</li>
+        <li class="bg-gray"> <a [routerLink]="['']" class="text-red"> <i class="fa fa-sign-out"></i> <span>Sair</span></a></li>
+      </ul>
+    </div>
+
   </section>
 
 </aside>

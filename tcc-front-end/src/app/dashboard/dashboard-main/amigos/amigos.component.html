@@ -19,8 +19,8 @@
                   <hr>
                 </div>
               </div>
-            </div>
-            <button *ngIf="num_amigos>5" (click)="getMoreFriends()" class="btn btn-primary"><b>Ver mais</b></button>
+          </div>
+          <button *ngIf="showGetMoreFriends()" (click)="getMoreFriends()" class="btn btn-primary"><b>Ver mais</b></button>
         </div>
         </div>
     </div>
@@ -45,10 +45,10 @@
                   <br>
                   <div class = "row">
                     <div class="col-md-6">
-                      <button  (click)="acceptSolicitation(pendente.node._id,pendente)" class="btn btn-block btn-primary"><b>Aceitar</b></button>
+                      <button  (click)="acceptSolicitation(pendente)" class="btn btn-block btn-primary"><b>Aceitar</b></button>
                     </div>
                     <div class="col-md-6">
-                        <button  (click)="refuseSolicitation(pendente.node._id,pendente)" class="btn btn-block btn-danger"><b>Recusar</b></button>
+                        <button  (click)="refuseSolicitation(pendente)" class="btn btn-block btn-danger"><b>Recusar</b></button>
                       </div>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
               </div>
             </div>
           </div>
-          <button *ngIf="num_esperando_aceitacao>5" (click)="getMoreSolicitationsRecieved()" class="btn btn-primary"><b>Ver mais</b></button>
+          <button *ngIf="showGetMoreSolicitationSent()" (click)="getMoreSolicitationsRecieved()" class="btn btn-primary"><b>Ver mais</b></button>
         </div>
       </div>
     </div>
@@ -79,7 +79,7 @@
                     <br>
                     <div class = "row">
                       <div class="col-md-12">
-                        <button  (click)="cancelSolicitation(pedido.node._id,pedido)" class="btn btn-block btn-default"><b>Cancelar Solicitação</b></button>
+                        <button  (click)="cancelSolicitation(pedido)" class="btn btn-block btn-default"><b>Cancelar Solicitação</b></button>
                       </div>
                     </div>
                   </div>
@@ -87,7 +87,7 @@
                 </div>
               </div>
             </div>
-            <button *ngIf="num_mandou_convite>5" (click)="getMoreSolicitationSent()" class="btn btn-primary"><b>Ver mais</b></button>
+            <button *ngIf="showGetMoreSolicitationsRecieved()" (click)="getMoreSolicitationSent()" class="btn btn-primary"><b>Ver mais</b></button>
 
           </div>
         </div>

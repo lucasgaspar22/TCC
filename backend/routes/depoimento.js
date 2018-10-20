@@ -38,7 +38,7 @@ router.get('/waiting_confirmation/:id/:pag', (req,res,next)=>{
 });
 
 // Retorna um depoimento Pendente e seu autor específicos 
-router.get('/waiting_confirmation/:idUser/:idDepo', (req,res,next) =>{
+router.get('/waiting_confirmation_specific_sender/:idUser/:idDepo', (req,res,next) =>{
     let idUser = parseInt(req.params.idUser);
     let idDepo = parseInt(req.params.idDepo);
     let query = `MATCH (user:User)<-[waiting:WAITING_CONFIRMATION]-(depo:Depo)<-[wrote:WROTE]-(sender:User) 
@@ -47,14 +47,14 @@ router.get('/waiting_confirmation/:idUser/:idDepo', (req,res,next) =>{
     db(query,res);
 });
 
-// Retorna todos os depoimentos escritos plo usuário juntamente com seus destinatários ( retorna tanto depoimentos pendentes quanto depoimentos aceitos )
+// Retorna todos os depoimentos pendentes escritos plo usuário juntamente com seus destinatários
 router.get('/wrote/:id/:pag' , (req,res,next)=>{
     let id = parseInt(req.params.id);
     let pag = parseInt(req.params.pag);
     let pagina = pag*5;
-    let query = `MATCH (user:User)-[wrote:WROTE]->(depo:Depo)-[rel]-(n:User) 
+    let query = `MATCH (user:User)-[wrote:WROTE]->(depo:Depo)-[rel:WAITING_CONFIRMATION]-(reciever:User) 
                 WHERE id(user)= ${id} 
-                return wrote,depo,rel,n SKIP ${pagina} LIMIT 5`;
+                return wrote,depo,rel,reciever SKIP ${pagina} LIMIT 5`;
     db(query,res);
 
 });
@@ -110,8 +110,8 @@ router.delete('/waiting_confirmation/:idUser/:idDepo', (req,res,next) =>{
     let idUser = parseInt(req.params.idUser);
     let idDepo = parseInt(req.params.idDepo);
     let query = `MATCH (user:User)<-[waiting:WAITING_CONFIRMATION]-(depo:Depo)<-[wrote:WROTE]-(sender:User) 
-                WHERE id(user) = ${idUser} AND id(depo) = ${idDepo} 
-                 DELETE waiting,wrote,depo`;
+                 WHERE id(user) = ${idUser} AND id(depo) = ${idDepo} 
+                 DELETE waiting,wrote,depo`; 
     db(query,res);
 });
 
@@ -119,17 +119,17 @@ router.delete('/waiting_confirmation/:idUser/:idDepo', (req,res,next) =>{
 router.delete('/waiting_confirmation/:id', (req,res,next) =>{
     let idUser = parseInt(req.params.id);
     let query = `MATCH (user:User)<-[waiting:WAITING_CONFIRMATION]-(depo:Depo)<-[wrote:WROTE]-(sender:User) 
-                WHERE id(user) = ${idUser} 
+                 WHERE id(user) = ${idUser} 
                  DELETE waiting,wrote,depo`;
     db(query,res);
 });
 
-//Método que deleta um depoimento escrito por um usuário
+//Método que deleta um depoimento escrito por um usuário que ainda não foi aceito
 router.delete('/wrote/:idUser/:idDepo', (req,res,next) =>{
     let idUser = parseInt(req.params.idUser);
     let idDepo = parseInt(req.params.idDepo);
-    let query = `MATCH (user:User)-[wrote:WROTE]->(depo:Depo)-[rel]-(reciever:User)
-                WHERE id(user) = ${idUser} AND id(depo) = ${idDepo} 
+    let query = `MATCH (user:User)-[wrote:WROTE]->(depo:Depo)-[rel:WAITING_CONFIRMATION]->(reciever:User)
+                 WHERE id(user) = ${idUser} AND id(depo) = ${idDepo} 
                  DELETE wrote,rel,depo`;
     db(query,res);
 });

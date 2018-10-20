@@ -8,15 +8,21 @@ import { Router } from '@angular/router'
 export class MenuComponent implements OnInit {
   
   user:any = {};
+  is_logged:boolean;
   id_logado:number = 0;
   img_usuario:string = "../../assets/images/menu_user.png";  
 
   constructor(private router:Router) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user')).node.properties;
-    this.id_logado = JSON.parse(localStorage.getItem('user')).node._id;
-    if( this.user.foto !== "") this.img_usuario = this.user.foto;
+    
+      
+      this.is_logged = true;
+      this.user = JSON.parse(localStorage.getItem('user')).node.properties;
+      this.id_logado = JSON.parse(localStorage.getItem('user')).node._id;
+      if( this.user.foto !== "") this.img_usuario = this.user.foto;
+    
+    
   }
 
   perfil(){

@@ -1,0 +1,115 @@
+<section class="content">
+  <div class = "row">
+    <div class="col-md-12">
+      <div class = "box box-solid">
+        <div class = "box-header with-border">
+          <h2 class="box-title"><b>Indicações</b></h2>
+        </div>
+        <div class = "box-body">
+            <div class= "row">
+                <div *ngFor="let indicacao of indicacoes;" class= "col-md-4">
+                  <div class="post">
+                    <div class="user-block">
+                      <img class="img-circle img-bordered-sm" src="{{indicacao.sender.properties.foto}}" alt="User Image">
+                        <span class="username">
+                          <a (click)="verPerfil(indicacao.sender._id)">{{indicacao.sender.properties.nome}}</a>
+                          
+                        </span>
+                        <span class="description">
+                            <a>{{indicacao.depo.properties.area}}</a>
+                            <a class="pull-right">{{indicacao.depo.properties.date}}</a>
+                        </span>
+                    </div>
+                    <p> {{indicacao.depo.properties.depo}}</p>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="box-footer">
+          <button *ngIf="indicacoes_num>5" (click)="getMoreIndications()" class="btn btn-primary"><b>Ver mais</b></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class="col-md-6">
+      <div class = "box box-solid">
+        <div class = "box-header with-border">
+          <h2 class="box-title"><b>Aguardando sua aceitação</b></h2>
+        </div>
+        <div class = "box-body">
+          <div class = "row">
+            <div *ngFor="let recebido of recebidos;" class= "col-md-12">
+              <div class="post">
+                <div class="user-block">
+                  <img class="img-circle img-bordered-sm" src="{{recebido.sender.properties.foto}}" alt="User Image">
+                  <span class="username">
+                    <a (click)="verPerfil(recebido.sender._id)">{{recebido.sender.properties.nome}}</a>   
+                  </span>
+                  <span class="description">
+                    <a>{{recebido.depo.properties.area}}</a>
+                    <a class="pull-right">{{recebido.depo.properties.date}}</a>
+                  </span>
+                </div>
+                <p> {{recebido.depo.properties.depo}}</p>
+                <br>
+                <div class = "row">
+                  <div class="col-md-6">
+                    <button (click)="acceptIndication(recebido)" class="btn btn-block btn-primary"><b>Aceitar</b></button>
+                  </div>
+                  <div class="col-md-6">
+                    <button (click)="refuseIndication(recebido)" class="btn btn-block btn-danger"><b>Recusar</b></button>
+                  </div>
+                </div>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-footer">
+          <button *ngIf="recebidos_num>5" (click)="getMoreRecievedIndications()" class="btn btn-primary"><b>Ver mais</b></button>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class = "box box-solid">
+          <div class = "box-header with-border">
+            <h2 class="box-title"><b>Você enviou</b></h2>
+          </div>
+          <div class = "box-body">
+            <div class = "row">
+              <div *ngFor="let enviado of enviados;" class= "col-md-12">
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="{{enviado.reciever.properties.foto}}" alt="User Image">
+                    <span class="username">
+                      <a (click)="verPerfil(enviado.reciever._id)">{{enviado.reciever.properties.nome}}</a>   
+                    </span>
+                    <span class="description">
+                      <a>{{enviado.depo.properties.area}}</a>
+                      <a class="pull-right">{{enviado.depo.properties.date}}</a>
+                    </span>
+                  </div>
+                  <p> {{enviado.depo.properties.depo}}</p>
+                  <br>
+                  <div class = "row">
+                    <div class="col-md-12">
+                      <button (click)="cancelIndicationSent(enviado)"class="btn btn-block btn-default"><b>Deletar</b></button>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box-footer"> 
+            <button *ngIf="enviados_num>5" (click)="getMoreSentIndications()" class="btn btn-primary"><b>Ver mais</b></button>    
+          </div>
+        </div>
+    </div>
+  </div>
+
+</section>
