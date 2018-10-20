@@ -47,14 +47,14 @@ export class LoginComponent implements OnInit {
 
   showSuccess(){
     this.toastr.success('Sucesso, login efetuado com sucesso!','Deu bom!',{
-      timeOut:5000
+      timeOut:2000
     });
     this.router.navigate(['/QuemIndica']);
   }
 
   showError(){
     this.toastr.error('Ops, verifique seu usuário e senha!','Deu ruim!',{
-      timeOut:5000
+      timeOut:2000
     });
   }
 }

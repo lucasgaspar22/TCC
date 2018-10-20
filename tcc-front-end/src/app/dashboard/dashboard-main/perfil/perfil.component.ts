@@ -20,6 +20,9 @@ export class PerfilComponent implements OnInit{
   usuario:any = {};
   depoimentos: any[] = [];
   grupos: any [] = [];
+  amigos:any[] = [];
+  pag_amigos:number = 0 ;
+  num_amigos:number = 0;
   pag_depo:number = 0;
   num_depo:number = 0 ;
   pag_group:number = 0;
@@ -28,7 +31,9 @@ export class PerfilComponent implements OnInit{
   relacao:any;
 
 
-  constructor(private router:Router,private perfilService:PerfilService, private http:HttpClient, private route:ActivatedRoute, private toastr:ToastrService) { }
+  constructor(private router:Router,private perfilService:PerfilService, private http:HttpClient, private route:ActivatedRoute, private toastr:ToastrService) { 
+    
+  }
 
    ngOnInit() {
     this.id_logado = JSON.parse(localStorage.getItem('user')).node._id;
@@ -36,23 +41,41 @@ export class PerfilComponent implements OnInit{
     this.pag_group = 0;
     this.num_depo = 0 ;
     this.num_group = 0 ;
+    this.num_amigos = 0;
+    this.pag_amigos =0;
     this.relacao = {};
-
     this.route.params.subscribe( params => {
       this.id = Number(params.id);
+      this.getUserInformation();
       if (this.id == this.id_logado) this.is_my_profile = true;
     });
+   
+  }
 
-    //Pega o usuário com id passado no parâmetro
-    this.perfilService.getUserById(this.id).subscribe(res=>{
+  getUserInformation(){
+
+    this.grupos = [];
+    this.depoimentos = [];
+    this.amigos = [];
+    this.pag_depo=0;
+    this.pag_group = 0;
+    this.pag_amigos =0;
+     //Pega o usuário com id passado no parâmetro
+     this.perfilService.getUserById(this.id).subscribe(res=>{
       this.usuario = res[0].node.properties;
-      console.log(this.usuario)
     });
     
     //Pega os depoimentos do usuário com o id passado no parametro
     this.perfilService.getUserDepos(this.id, this.pag_depo).subscribe(res=>{
       for( let index = 0; index< res.length; index++ ){
         this.depoimentos.push(res[index]);
+      }
+    });
+
+    //Pega todos os amigos de um usuário
+    this.perfilService.getFriends(this.id, this.pag_amigos).subscribe(res=>{
+      for( let index =0 ; index<res.length; index++){
+        this.amigos.push(res[index]);
       }
     });
 
@@ -86,19 +109,7 @@ export class PerfilComponent implements OnInit{
         this.relacao.type = 'Nenhum';
       }
     })
-
   }
-
-  // Função que pega o ID que está na URL
-  getUserId():number{
-    var id;
-    this.route.params.subscribe( params => {
-      id = Number(params.id);
-      if (id == this.id_logado) this.is_my_profile = true;
-    });
-    return id;
-  }
-
   // Função que cria uma relação ASK AS FRIEND entre dois nós
   askAsFriend(){
     this.perfilService.askAsFriend(this.id, this.id_logado).subscribe(res=>{
@@ -135,6 +146,47 @@ export class PerfilComponent implements OnInit{
     })
   }
 
+  getMoreIndication(){
+    this.pag_depo ++;
+    this.perfilService.getUserDepos(this.id, this.pag_depo).subscribe(res=>{
+      for( let index = 0; index< res.length; index++ ){
+        this.depoimentos.push(res[index]);
+      }
+    });
+  }
+
+  getMoreGroups(){
+    this.pag_group ++;
+    this.perfilService.getUserGroups(this.id, this.pag_group).subscribe(res=>{
+      for( let index = 0; index< res.length; index++ ){
+        this.grupos.push(res[index]);
+      }
+    });
+  }
+
+  getMoreFriends(){
+    this.pag_amigos ++;
+    this.perfilService.getFriends(this.id, this.pag_amigos).subscribe(res=>{
+      for( let index =0 ; index<res.length; index++){
+        this.amigos.push(res[index]);
+      }
+    });
+  }
+
+  showMoreFriends(){
+    if( this.num_amigos>5 && this.amigos.length< this.num_amigos) return true;
+    else return false;
+  }
+
+  showMoreGroups(){
+    if(this.num_group>5 && this.grupos.length<this.num_group) return true;
+    else return false;
+  }
+  showMoreIndication(){
+    if(this.num_depo>5 && this.depoimentos.length<this.num_depo) return true;
+    else return false;
+  }
+
   sendIndication(form:any){
 
     let depo ={
@@ -156,8 +208,6 @@ export class PerfilComponent implements OnInit{
   }
 
   verPerfil(id:number){
-    //alert(id)
-    //this.ngOnInit();
     this.router.navigate(['/QuemIndica/perfil',id])
   }
 

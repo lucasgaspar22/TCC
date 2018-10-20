@@ -146,7 +146,7 @@ router.put('/ask_membership/:idG/:idU',(req,res,next)=>{
                  RETURN rel`;
 
    db(query,res);
-});
+}); 
 
 //Método para um convidado aceitar um convite do grupo 
 router.put('/invite/:idG/:idI',(req,res,next)=>{

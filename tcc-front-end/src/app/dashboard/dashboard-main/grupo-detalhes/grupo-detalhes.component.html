@@ -30,7 +30,7 @@
     <div class="col-md-9">
         <div class = "box box-solid">
             <div class = "box-header with-border">
-                <h2 class="box-title"><b>Membros</b> <small> {{num_membros}} de {{num_membros}}</small></h2>
+                <h2 class="box-title"><b>Membros</b></h2>
             </div>
             <div class = "box-body">
                 <div class= "row">
@@ -47,7 +47,7 @@
                     </div>
                     
                 </div>
-                <button  class="btn btn-primary btn-block"><b>Ver mais</b></button>
+                <button  *ngIf="showMoreMembers()" (click)="getMoreGroupMembers() " class="btn btn-primary "><b>Ver mais</b></button>
 
             </div>
         </div>

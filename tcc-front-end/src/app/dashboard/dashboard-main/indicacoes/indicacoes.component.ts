@@ -144,4 +144,19 @@ export class IndicacoesComponent implements OnInit {
     this.router.navigate(['/QuemIndica/perfil', id]);
   }
 
+  showMoreIndications(){
+    if(this.indicacoes_num>5 && this.indicacoes.length<this.indicacoes_num) return true;
+    else return false;
+  }
+
+  showMoreRecieved(){
+    if (this.recebidos_num>5 && this.recebidos.length< this.recebidos_num) return true;
+    else return false;
+  }
+
+  showMoreSent(){
+    if(this.enviados_num>5 && this.enviados.length<this.enviados_num) return true;
+    else return false;
+  }
+
 }

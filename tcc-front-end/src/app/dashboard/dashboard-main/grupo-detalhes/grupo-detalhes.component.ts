@@ -120,12 +120,25 @@ export class GrupoDetalhesComponent implements OnInit {
   }
 
   getGroupMembers(){
-    this.membros_num = this.membros.length;
     this.grupoDetalheService.getGroupMembers(this.id_grupo,this.pag_membros).subscribe((res)=>{
       for(let index=0 ; index<res.length; index++){
         this.membros.push(res[index]);
       }
     });
+  }
+
+  getMoreGroupMembers(){
+    this.pag_membros++;
+    this.grupoDetalheService.getGroupMembers(this.id_grupo,this.pag_membros).subscribe((res)=>{
+      for(let index=0 ; index<res.length; index++){
+        this.membros.push(res[index]);
+      }
+    });
+  }
+
+  showMoreMembers(){
+    if(this.num_membros>5 && this.membros.length<this.num_membros) return true;
+    else return false;
   }
 
   getGroupDetail(){

@@ -13,6 +13,12 @@ export class PerfilService {
     return  this.http.get<any[]>(url_get_usuario);
   }
 
+  getFriends(id_logado:number,pagina:number){
+    let url = `http://localhost:3003/API/is_friend/${id_logado}/${pagina}`;
+    return this.http.get<any[]>(url);
+  }
+
+
   getUserDepos(id:number, pag:number){
     let url_get_depos = `http://localhost:3003/API/depoimento/has_depo/${String(id)}/${String(pag)}`;
 

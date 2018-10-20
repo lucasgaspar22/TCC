@@ -1,4 +1,4 @@
-<section class = "content">
+<section class = "content"  style="height: auto;">
     <div class = "row">
         <div class = "col-md-3">
             <div class="box box-primary">
@@ -34,7 +34,7 @@
                         <p class="text-muted">{{grupo.group.properties.descricao}}</p>
                         <hr>
                     </div>
-                    <button *ngIf="num_group>5" class="btn btn-primary btn-block"><b>Ver mais</b></button>
+                    <button (click)="getMoreGroups()" *ngIf="showMoreGroups()" class="btn btn-primary btn-block"><b>Ver mais</b></button>
 
                 </div>
             </div>
@@ -62,10 +62,35 @@
                             </div>
                         </div>
                     </div>
-                    <button *ngIf="num_group>5" class="btn btn-primary"><b>Ver mais</b></button>
+                    <button (click)= "getMoreIndication()" *ngIf="showMoreIndication()" class="btn btn-primary"><b>Ver mais</b></button>
 
                 </div>
             </div>
+        </div>
+
+
+        <div class="col-md-9">
+                <div class = "box box-solid">
+                        <div class = "box-header with-border">
+                            <h2 class="box-title"><b>Amigos</b></h2>
+                        </div>
+                        <div class = "box-body">
+                                <div *ngFor="let amigo of amigos;" class= "col-md-6">
+                                        <div class="post">
+                                          <div class="user-block">
+                                            <img class="img-circle img-bordered-sm" src="{{amigo.node.properties.foto}}" alt="User Image">
+                                              <span class="username">
+                                                <a (click)="verPerfil(amigo.node._id)">{{amigo.node.properties.nome}}</a>
+                                              </span>
+                                              <span class="description">{{amigo.rel.properties.since}}</span>
+                                            </div>
+                                            <hr>
+                                          </div>
+                                      </div>
+                            <button (click)= "showMoreFriends()" *ngIf="getMoreFriends()" class="btn btn-primary"><b>Ver mais</b></button>
+        
+                        </div>
+                    </div>
         </div>
     </div>
 
