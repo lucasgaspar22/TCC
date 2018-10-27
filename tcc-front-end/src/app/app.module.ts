@@ -30,7 +30,7 @@ import { GruposService } from './dashboard/dashboard-main/grupos/grupos-service.
 import { GrupoDetalhesService } from './dashboard/dashboard-main/grupo-detalhes/grupo-detalhes-service.service';
 import { AmigosService } from './dashboard/dashboard-main/amigos/amigos.service';
 import { IndicacoesService } from './dashboard/dashboard-main/indicacoes/indicacoes.service'
-
+import { DashboardMainService } from './dashboard/dashboard-main/dashboard-main-service.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,8 @@ import { IndicacoesService } from './dashboard/dashboard-main/indicacoes/indicac
     GruposService,
     GrupoDetalhesService,
     AmigosService,
-    IndicacoesService
+    IndicacoesService,
+    DashboardMainService
   ],
   bootstrap: [AppComponent]
 })

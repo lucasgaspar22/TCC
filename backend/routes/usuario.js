@@ -11,7 +11,7 @@ router.get('/all/:pag', (req, res,next)=>{
     db(query,res)
 }); 
 
-//Método que retorna os nós que contém a sting no nome ou no email
+//Método que retorna os nós que contém a string no nome ou no email
 router.get('/search/:string/:id', (req,res,next)=>{
     let string = req.params.string;
     let id = parseInt(req.params.id);

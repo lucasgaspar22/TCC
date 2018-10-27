@@ -3,39 +3,80 @@
         <div class="col-md-4">
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3>150</h3>
-                    <h4>Depoimentos</h4>
+                    <h3>{{indication_num}}</h3>
+                    <h4>Indicações</h4>
                 </div>
                 <div class="icon">
                     <i class="fa fa-comments"></i>
                 </div>
-                <a class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+                <a [routerLink]="['indicacoes']" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="small-box bg-red">
                 <div class="inner">
-                    <h3>15</h3>
+                    <h3>{{group_num}}</h3>
                     <h4>Grupos</h4>
                 </div>
                 <div class="icon">
                     <i class="fa fa-tags"></i>
                 </div>
-                <a class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+                <a [routerLink]="['grupos']" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>4300000</h3>
+                    <h3>{{friends_num}}</h3>
                     <h4>Amigos</h4>
                 </div>
                 <div class="icon">
                     <i class="fa fa-users"></i>
                 </div>
-                <a class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+                <a [routerLink]="['amigos']" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class = "row">
+        <div class="col-md-4">
+            <div class="small-box bg-purple">
+                <div class="inner">
+                    <h3>{{new_indication_num}}</h3>
+                    <h4>Indicações pendentes</h4>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <a [routerLink]="['indicacoes']" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="small-box bg-orange">
+                <div class="inner">
+                    <h3>{{new_group_num}}</h3>
+                    <h4>Convites de Grupos</h4>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-tags"></i>
+                </div>
+                <a [routerLink]="['grupos']" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="small-box bg-teal">
+                <div class="inner">
+                    <h3>{{new_frinds_num}}</h3>
+                    <h4>Pedidos de Amizade</h4>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                <a [routerLink]="['amigos']" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
     </div>
