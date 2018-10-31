@@ -30,36 +30,48 @@ export class PerfilComponent implements OnInit{
   num_friends:number = 0 ;
   relacao:any;
 
+  is_logged:boolean = false;
 
-  constructor(private router:Router,private perfilService:PerfilService, private http:HttpClient, private route:ActivatedRoute, private toastr:ToastrService) { 
+
+  constructor(private router:Router,private perfilService:PerfilService, private route:ActivatedRoute, private toastr:ToastrService) { 
     
   }
 
    ngOnInit() {
-    this.id_logado = JSON.parse(localStorage.getItem('user')).node._id;
-    this.pag_depo = 0 ;
-    this.pag_group = 0;
-    this.num_depo = 0 ;
-    this.num_group = 0 ;
-    this.num_amigos = 0;
-    this.pag_amigos =0;
-    this.relacao = {};
+    
+    if(localStorage.length>0){
+      this.is_logged=true;
+      this.id_logado = JSON.parse(localStorage.getItem('user')).node._id;
+    }else{
+      this.is_logged=false;
+    }
+
     this.route.params.subscribe( params => {
+      this.pag_depo = 0 ;
+      this.pag_group = 0;
+      this.num_depo = 0 ;
+      this.num_group = 0 ;
+      this.num_amigos = 0;
+      this.pag_amigos =0;
+      this.relacao = {};
+      this.usuario = {};
+      this.amigos=[];
+      this.depoimentos=[];
+      this.grupos=[];
       this.id = Number(params.id);
       this.getUserInformation();
-      if (this.id == this.id_logado) this.is_my_profile = true;
+      
+      if(this.is_logged){
+        if (this.id == this.id_logado) this.is_my_profile = true;
+      }else{
+        this.is_my_profile = false;
+      }
+      
     });
    
   }
 
   getUserInformation(){
-
-    this.grupos = [];
-    this.depoimentos = [];
-    this.amigos = [];
-    this.pag_depo=0;
-    this.pag_group = 0;
-    this.pag_amigos =0;
      //Pega o usuário com id passado no parâmetro
      this.perfilService.getUserById(this.id).subscribe(res=>{
       this.usuario = res[0].node.properties;
@@ -101,14 +113,16 @@ export class PerfilComponent implements OnInit{
       this.num_friends = res[0].friends;
     });
 
-    //Pega a relação entre o usuário logado e o usuário do perfil
-    this.perfilService.getUserProfileRelation(this.id,this.id_logado).subscribe(res =>{
-      if(res.length > 0){
-        this.relacao = res[0].rel;
-      } else {
-        this.relacao.type = 'Nenhum';
-      }
-    })
+    if(this.is_logged){
+      //Pega a relação entre o usuário logado e o usuário do perfil
+      this.perfilService.getUserProfileRelation(this.id,this.id_logado).subscribe(res =>{
+        if(res.length > 0){
+          this.relacao = res[0].rel;
+        } else {
+          this.relacao.type = 'Nenhum';
+        }
+      })
+   }
   }
   // Função que cria uma relação ASK AS FRIEND entre dois nós
   askAsFriend(){

@@ -46,7 +46,7 @@ export class DashboardMainComponent implements OnInit {
       }
     });
 
-    this.dashboardMainService.getIndicationNumber(this.id).subscribe( res =>{
+    this.dashboardMainService.getNewIndicationNumber(this.id).subscribe( res =>{
       if(res.length>0){
         this.new_indication_num = res[0].depos
       }

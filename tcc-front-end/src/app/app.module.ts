@@ -31,6 +31,7 @@ import { GrupoDetalhesService } from './dashboard/dashboard-main/grupo-detalhes/
 import { AmigosService } from './dashboard/dashboard-main/amigos/amigos.service';
 import { IndicacoesService } from './dashboard/dashboard-main/indicacoes/indicacoes.service'
 import { DashboardMainService } from './dashboard/dashboard-main/dashboard-main-service.service';
+import { MenuService } from './menu/menu.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { DashboardMainService } from './dashboard/dashboard-main/dashboard-main-
     GrupoDetalhesService,
     AmigosService,
     IndicacoesService,
-    DashboardMainService
+    DashboardMainService,
+    MenuService
   ],
   bootstrap: [AppComponent]
 })

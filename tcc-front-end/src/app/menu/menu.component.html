@@ -23,6 +23,14 @@
       </ul>
     </div>
 
+    <div *ngIf="!is_logged">
+      <ul class="sidebar-menu">
+        <li class="header">Quem Indica?</li>
+        <li><a [routerLink]="['']"><i class="fa fa-sign-in"></i> <span>Faça Login</span></a></li>
+        <li><a [routerLink]="['/Cadastro']"><i class="fa fa-key"></i> <span>Cadastre-se</span></a></li>
+      </ul>
+    </div>
+
   </section>
 
 </aside>

@@ -23,6 +23,7 @@ export class GrupoDetalhesComponent implements OnInit {
   creator:any ={labels:["User"],properties:{email:"",nome:"",foto:"",local:"",profissao:"",token:""},_id:""};
   rel_group_creator:any={properties:{data:""},type:"CREATED",_fromId:"",_id:"",_toId:""};
 
+  is_logged:boolean=false;
   usuarios: any = [];
   encontrou_usuarios:boolean = false;
 
@@ -31,12 +32,18 @@ export class GrupoDetalhesComponent implements OnInit {
   ngOnInit() {
     this.id_grupo = this.getGroupId();
     this.pag_membros=0;
-    this.id_logado = JSON.parse(localStorage.getItem('user')).node._id;
+
+    if(localStorage.length>0){
+      this.is_logged=true;
+      this.id_logado = JSON.parse(localStorage.getItem('user')).node._id;
+    }else{
+      this.is_logged=false;
+    }
 
     this.getGroupDetail();
     this.getGroupMembers();
     this.getMembersNumber();
-    this.getRelationUserGroup();
+    if(this.is_logged) this.getRelationUserGroup();
   }
  
 
