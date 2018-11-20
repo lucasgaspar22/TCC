@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private http:HttpClient, private router:Router, private toastr:ToastrService) { }
 
   ngOnInit() {
+    localStorage.clear();
   }
 
   async login(form:any){
